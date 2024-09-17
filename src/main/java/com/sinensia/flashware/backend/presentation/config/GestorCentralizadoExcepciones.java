@@ -16,6 +16,18 @@ import com.sinensia.flashware.backend.business.services.config.BusinessException
 @ControllerAdvice
 public class GestorCentralizadoExcepciones extends ResponseEntityExceptionHandler{
 
+	// ************************************************************************************************************************
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<?> gestionarErrorn(Exception ex, WebRequest request){
+			
+			HttpErrorResponse httpErrorResponse = new HttpErrorResponse("Ha habido un problema en el servidor.");
+			
+			return handleExceptionInternal(ex, httpErrorResponse, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+		}
+	
+	// ************************************************************************************************************************
+	
 	@ExceptionHandler(BusinessException.class)
 	public ResponseEntity<?> gestionarBusinessExceptions(BusinessException ex, WebRequest request) {
 			
