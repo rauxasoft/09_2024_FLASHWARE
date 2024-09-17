@@ -11,7 +11,7 @@ import com.sinensia.flashware.backend.business.services.config.BusinessException
 public interface ProductoServices {
 
 	/**
-	 * Si el código no es null lanza IllegalStateException
+	 * Si el código no es null lanza BusinessException
 	 * 
 	 * Crea un codigo de forma automática y correlativa
 	 * 
@@ -21,13 +21,13 @@ public interface ProductoServices {
 	Optional<Producto> read(Long codigo);						
 	
 	/**
-	 * Si el producto no existe lanza IllegalStateException
+	 * Si el producto no existe lanza BusinessException
 	 * 
 	 */
 	void update(Producto producto) throws BusinessException;								
 	
 	/**
-	 * Si el codigo no existe lanza IllegalStateException
+	 * Si el codigo no existe lanza BusinessException
 	 * 
 	 */
 	void delete(Long codigo) throws BusinessException;									

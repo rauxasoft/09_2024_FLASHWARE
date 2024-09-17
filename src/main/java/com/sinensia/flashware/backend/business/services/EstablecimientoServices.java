@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sinensia.flashware.backend.business.model.Establecimiento;
+import com.sinensia.flashware.backend.business.services.config.BusinessException;
 
 public interface EstablecimientoServices {
 	
@@ -13,15 +14,15 @@ public interface EstablecimientoServices {
 	 * Crea un ID de forma automática y correlativa
 	 * 
 	 */
-	Long create(Establecimiento establecimiento);
+	Long create(Establecimiento establecimiento) throws BusinessException;
 	
-	Optional<Establecimiento> read(Long id);						// R
+	Optional<Establecimiento> read(Long id);						
 	
 	/**
-	 * Si el establecimiento no existe lanza IllegalStateException
+	 * Si el establecimiento no existe lanza BusinessException
 	 * 
 	 */
-	void update(Establecimiento establecimiento);
+	void update(Establecimiento establecimiento) throws BusinessException;
 	
 	List<Establecimiento> getAll();
 	
