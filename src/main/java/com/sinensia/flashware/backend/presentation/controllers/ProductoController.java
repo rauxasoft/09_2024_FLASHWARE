@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Producto;
 import com.sinensia.flashware.backend.business.services.ProductoServices;
-import com.sinensia.flashware.backend.business.services.config.BusinessException;
 import com.sinensia.flashware.backend.presentation.config.PresentationException;
 
 @RestController

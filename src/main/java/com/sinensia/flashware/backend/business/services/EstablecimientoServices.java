@@ -3,8 +3,8 @@ package com.sinensia.flashware.backend.business.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Establecimiento;
-import com.sinensia.flashware.backend.business.services.config.BusinessException;
 
 public interface EstablecimientoServices {
 	

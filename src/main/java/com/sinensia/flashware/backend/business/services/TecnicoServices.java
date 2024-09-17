@@ -2,8 +2,8 @@ package com.sinensia.flashware.backend.business.services;
 
 import java.util.List;
 
+import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Tecnico;
-import com.sinensia.flashware.backend.business.services.config.BusinessException;
 
 public interface TecnicoServices {
 

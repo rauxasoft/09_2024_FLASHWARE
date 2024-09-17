@@ -13,10 +13,10 @@ import java.util.TreeMap;
 
 import org.springframework.stereotype.Service;
 
+import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Categoria;
 import com.sinensia.flashware.backend.business.model.Producto;
 import com.sinensia.flashware.backend.business.services.ProductoServices;
-import com.sinensia.flashware.backend.business.services.config.BusinessException;
 
 @Service
 public class ProductoServicesImpl implements ProductoServices{

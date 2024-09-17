@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Categoria;
 import com.sinensia.flashware.backend.business.model.Producto;
-import com.sinensia.flashware.backend.business.services.config.BusinessException;
 
 public interface ProductoServices {
 
