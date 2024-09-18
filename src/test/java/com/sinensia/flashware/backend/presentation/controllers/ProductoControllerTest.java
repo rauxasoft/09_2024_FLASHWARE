@@ -31,7 +31,7 @@ import com.sinensia.flashware.backend.business.services.ProductoServices;
 import com.sinensia.flashware.backend.presentation.config.HttpErrorResponse;
 
 @WebMvcTest(ProductoController.class)
-public class ProductoControllerTest {
+class ProductoControllerTest {
 
 	@Autowired
 	private MockMvc miniPostman;
