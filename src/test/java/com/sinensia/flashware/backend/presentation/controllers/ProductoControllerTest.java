@@ -5,6 +5,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -156,7 +157,7 @@ class ProductoControllerTest {
 		String requestBody = objectMapper.writeValueAsString(producto1);
 		
 		miniPostman.perform(put("/productos/1000").contentType("application/json").content(requestBody))
-							.andExpect(status().isNoContent());
+						.andExpect(status().isNoContent());
 		
 		verify(productoServices, times(1)).update(producto1);
 		
@@ -170,12 +171,37 @@ class ProductoControllerTest {
 		String requestBody = objectMapper.writeValueAsString(producto1);
 		
 		MvcResult respuesta = miniPostman.perform(put("/productos/1000").contentType("application/json").content(requestBody))
-							.andExpect(status().isBadRequest())
-							.andReturn();
+											.andExpect(status().isBadRequest())
+											.andReturn();
 		
 		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
 		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("El producto con codigo 1000 no existe."));
 				
+		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
+		
+	}
+	
+	@Test
+	void eliminamos_producto_ok() throws Exception {
+		
+		miniPostman.perform(delete("/productos/1000").contentType("application/json"))
+						.andExpect(status().isNoContent());
+		
+		verify(productoServices, times(1)).delete(1000L);
+	}
+	
+	@Test
+	void eliminamos_producto_NO_EXISTENTE() throws Exception {
+		
+		doThrow(new BusinessException("El producto con codigo 1000 no existe.", true)).when(productoServices).delete(1000L);
+		
+		MvcResult respuesta =miniPostman.perform(delete("/productos/1000").contentType("application/json"))
+											.andExpect(status().isBadRequest())
+											.andReturn();
+		
+		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
+		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("El producto con codigo 1000 no existe."));
+		
 		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
 		
 	}
