@@ -45,8 +45,8 @@ public class ProductoController {
 	}
 	
 	@GetMapping
-	public List<Producto> getBetweenPriceRange(@RequestParam(required = false) Double min, 
-											   @RequestParam(required = false) Double max){
+	public List<Producto> getProductos(@RequestParam(required = false) Double min, 
+									   @RequestParam(required = false) Double max){
 		
 		List<Producto> productos = null;
 		
@@ -75,6 +75,7 @@ public class ProductoController {
 		
 		producto.setCodigo(codigo);
 		productoServices.update(producto);
+
 	}
 	
 	@DeleteMapping("/{codigo}")
