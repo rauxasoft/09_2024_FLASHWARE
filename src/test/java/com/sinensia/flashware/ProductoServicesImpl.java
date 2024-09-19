@@ -1,4 +1,4 @@
-package com.sinensia.flashware.backend.business.services.impl;
+package com.sinensia.flashware;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

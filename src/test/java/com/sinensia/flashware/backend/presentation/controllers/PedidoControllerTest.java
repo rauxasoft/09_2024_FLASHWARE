@@ -33,6 +33,7 @@ class PedidoControllerTest {
 	private PedidoServices pedidoServices;
 	
 	private Pedido pedido1;
+	private Pedido pedido2;
 	
 	@BeforeEach
 	void init() {
@@ -55,6 +56,8 @@ class PedidoControllerTest {
 		
 	}
 	
+	
+	
 	// ************************************************************************
 	//
 	// Private Methods
@@ -63,9 +66,11 @@ class PedidoControllerTest {
 
 	private void initObjects() {
 		
-		Pedido pedido1 = new Pedido();
+		pedido1 = new Pedido();
+		pedido2 = new Pedido();
 		
 		pedido1.setNumero(1L);
+		pedido1.setNumero(2L);
 		
 	}
 	

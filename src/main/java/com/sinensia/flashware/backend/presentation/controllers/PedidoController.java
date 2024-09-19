@@ -18,8 +18,8 @@ import com.sinensia.flashware.backend.presentation.config.PresentationException;
 public class PedidoController {
 
 	@Autowired
-	private PedidoServices pedidoServices;
-	
+	private  PedidoServices pedidoServices;
+
 	@GetMapping("/{numero}")
 	public Pedido read(@PathVariable Long numero) {
 		
