@@ -1,4 +1,4 @@
-package com.sinensia.flashware.backend.presentation.controllers;
+package com.sinensia.flashware.backend.presentation.restcontrollers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -6,7 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,11 +18,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sinensia.flashware.backend.business.model.Pedido;
-import com.sinensia.flashware.backend.business.services.PedidoServices;
+import com.sinensia.flashware.backend.business.model.Establecimiento;
+import com.sinensia.flashware.backend.business.services.EstablecimientoServices;
 
-@WebMvcTest(PedidoController.class)
-class PedidoControllerTest {
+@WebMvcTest(EstablecimientoController.class)
+class EstablecimientoControllerTest {
 
 	@Autowired
 	private MockMvc miniPostman;
@@ -30,10 +31,11 @@ class PedidoControllerTest {
 	private ObjectMapper objectMapper;
 	
 	@MockBean
-	private PedidoServices pedidoServices;
+	private EstablecimientoServices establecimientoServices;
 	
-	private Pedido pedido1;
-	private Pedido pedido2;
+	private Establecimiento establecimiento1;
+	private Establecimiento establecimiento2;
+	private List<Establecimiento> establecimientos;
 	
 	@BeforeEach
 	void init() {
@@ -41,25 +43,19 @@ class PedidoControllerTest {
 	}
 	
 	@Test
-	void pedimos_pedido_por_codigo() throws Exception {
-		
-		when(pedidoServices.read(1L)).thenReturn(Optional.of(pedido1));
-		
-		MvcResult respuesta = miniPostman.perform(get("/pedidos/1").contentType("application/json"))
+	void pedimos_todos_los_establecimientos() throws Exception {
+	
+		when(establecimientoServices.getAll()).thenReturn(establecimientos);
+	
+		MvcResult respuesta = miniPostman.perform(get("/establecimientos").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
 		
 		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String pedidoJSON = objectMapper.writeValueAsString(pedido1);
+		String establecimientosJSON = objectMapper.writeValueAsString(establecimientos);
 				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(pedidoJSON);
-		
+		assertThat(responseBody).isEqualToIgnoringWhitespace(establecimientosJSON);
 	}
-	
-	// TODO s
-	
-	
-	
 	
 	
 	// ************************************************************************
@@ -70,12 +66,15 @@ class PedidoControllerTest {
 
 	private void initObjects() {
 		
-		pedido1 = new Pedido();
-		pedido2 = new Pedido();
+		establecimiento1 = new Establecimiento();
+		establecimiento2 = new Establecimiento();
 		
-		pedido1.setNumero(1L);
-		pedido1.setNumero(2L);
+		establecimiento1.setId(1L);
+		establecimiento2.setId(2L);
+		
+		establecimientos = Arrays.asList(establecimiento1, establecimiento2);
 		
 	}
+
 	
 }

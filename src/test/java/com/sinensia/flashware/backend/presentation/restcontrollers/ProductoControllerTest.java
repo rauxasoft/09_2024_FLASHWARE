@@ -1,4 +1,4 @@
-package com.sinensia.flashware.backend.presentation.controllers;
+package com.sinensia.flashware.backend.presentation.restcontrollers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doThrow;
@@ -195,7 +195,7 @@ class ProductoControllerTest {
 		
 		doThrow(new BusinessException("El producto con codigo 1000 no existe.", true)).when(productoServices).delete(1000L);
 		
-		MvcResult respuesta =miniPostman.perform(delete("/productos/1000").contentType("application/json"))
+		MvcResult respuesta = miniPostman.perform(delete("/productos/1000").contentType("application/json"))
 											.andExpect(status().isBadRequest())
 											.andReturn();
 		

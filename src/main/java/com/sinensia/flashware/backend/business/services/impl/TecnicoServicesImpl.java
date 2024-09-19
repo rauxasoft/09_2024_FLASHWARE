@@ -1,13 +1,17 @@
 package com.sinensia.flashware.backend.business.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
+
+import org.springframework.stereotype.Service;
 
 import com.sinensia.flashware.backend.business.model.DatosContacto;
 import com.sinensia.flashware.backend.business.model.Direccion;
 import com.sinensia.flashware.backend.business.model.Tecnico;
 import com.sinensia.flashware.backend.business.services.TecnicoServices;
 
+@Service
 public class TecnicoServicesImpl implements TecnicoServices{
 
 	private final TreeMap<Long, Tecnico> TECNICOS_DB = new TreeMap<>();
@@ -24,8 +28,7 @@ public class TecnicoServicesImpl implements TecnicoServices{
 
 	@Override
 	public List<Tecnico> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>(TECNICOS_DB.values());
 	}
 	
 	// ************************************************************************

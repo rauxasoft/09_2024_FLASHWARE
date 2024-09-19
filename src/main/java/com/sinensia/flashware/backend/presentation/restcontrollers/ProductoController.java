@@ -1,4 +1,4 @@
-package com.sinensia.flashware.backend.presentation.controllers;
+package com.sinensia.flashware.backend.presentation.restcontrollers;
 
 import java.net.URI;
 import java.util.List;
@@ -72,18 +72,14 @@ public class ProductoController {
 	@PutMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void update(@RequestBody Producto producto, @PathVariable Long codigo) throws BusinessException {
-		
 		producto.setCodigo(codigo);
 		productoServices.update(producto);
-
 	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long codigo) throws BusinessException {
-		
 		productoServices.delete(codigo);
-		
 	}
 	
 }

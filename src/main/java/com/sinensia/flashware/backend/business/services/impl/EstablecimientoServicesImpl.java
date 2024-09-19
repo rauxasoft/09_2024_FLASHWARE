@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.TreeMap;
 
+import org.springframework.stereotype.Service;
+
 import com.sinensia.flashware.backend.business.model.DatosContacto;
 import com.sinensia.flashware.backend.business.model.Direccion;
 import com.sinensia.flashware.backend.business.model.Establecimiento;
 import com.sinensia.flashware.backend.business.services.EstablecimientoServices;
 
+@Service
 public class EstablecimientoServicesImpl implements EstablecimientoServices{
 
 	private final TreeMap<Long, Establecimiento> ESTABLECIMIENTOS_DB = new TreeMap<>();
@@ -110,8 +113,8 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices{
 		Establecimiento e2 = new Establecimiento();
 		e2.setId(1001L);
 		e2.setNombre("VAGUADA");
-		e2.setDatosContacto(dc1);
-		e2.setDireccion(d1);
+		e2.setDatosContacto(dc2);
+		e2.setDireccion(d2);
 		
 		ESTABLECIMIENTOS_DB.put(e1.getId(), e1);
 		ESTABLECIMIENTOS_DB.put(e2.getId(), e2);
