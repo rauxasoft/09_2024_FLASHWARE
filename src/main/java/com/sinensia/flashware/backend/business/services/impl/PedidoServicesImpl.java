@@ -39,8 +39,8 @@ public class PedidoServicesImpl implements PedidoServices{
 	}
 
 	@Override
-	public Optional<Pedido> read(Long codigo) {
-		return Optional.ofNullable(PEDIDOS_DB.get(codigo));
+	public Optional<Pedido> read(Long numero) {
+		return Optional.ofNullable(PEDIDOS_DB.get(numero));
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class PedidoServicesImpl implements PedidoServices{
 	}
 
 	@Override
-	public void delete(Long codigo) throws BusinessException {
+	public void delete(Long numero) throws BusinessException {
 		// TODO Auto-generated method stub
 		
 	}

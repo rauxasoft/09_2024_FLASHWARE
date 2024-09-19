@@ -17,7 +17,7 @@ public interface PedidoServices {
 	 */
 	Long create(Pedido pedido) throws BusinessException;								
 	
-	Optional<Pedido> read(Long codigo);						
+	Optional<Pedido> read(Long numero);						
 	
 	/**
 	 * Si el pedido no existe lanza BusinessException
@@ -29,7 +29,7 @@ public interface PedidoServices {
 	 * Si el número no existe lanza BusinessException
 	 * 
 	 */
-	void delete(Long codigo) throws BusinessException;									
+	void delete(Long numero) throws BusinessException;									
 	
 	List<Pedido> getAll();
 	
