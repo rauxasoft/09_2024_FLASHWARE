@@ -255,7 +255,7 @@ public class ProductoServicesImpl implements ProductoServices{
 		p4.setCategoria(Categoria.SOFTWARE);
 		p4.setPrecio(44.0);
 		p4.setFechaAlta(fecha4);
-		p4.setDescatalogado(false);
+		p4.setDescatalogado(true);
 		
 		p5.setCodigo(104L);
 		p5.setNombre("Impresora Pluxton F14");

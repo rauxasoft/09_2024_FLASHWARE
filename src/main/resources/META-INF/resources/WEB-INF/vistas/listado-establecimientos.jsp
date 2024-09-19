@@ -13,7 +13,7 @@
 		<ul>
 			<li><a href="/app/home">Home</a></li>
 			<li><a href="/app/listado-establecimientos">Establecimientos</a></li>
-			<li><a href="/app/productos">Productos</a></li>
+			<li><a href="/app/listado-productos">Productos</a></li>
 		</ul>
 	</nav>
 	<hr>
