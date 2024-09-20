@@ -16,16 +16,14 @@ public class AppHomeController {
 
 	@Autowired
 	private ProductoServices productoServices;
-	
-	// GET    http://10.250.9.1:8080/app/home
-	
+
 	@GetMapping("/home")
 	public ModelAndView getPaginaHome(HttpServletRequest request, ModelAndView mav) {
 		
 		int numeroProductos = productoServices.getNumeroTotalProductos();
 		String ip = request.getRemoteAddr();
 		
-		System.out.println("Hay " + numeroProductos + " productos! (petición realizada por " + ip + ")");
+		System.out.println("Petición realizada por: " + ip);
 		
 		mav.addObject("numeroProductos", numeroProductos);
 		mav.setViewName("home");
