@@ -27,7 +27,7 @@
  - Un controlador que mediante un método GET me devuelva el formulario. Por ejemplo: GET /app/formulario-alta-establecimiento
  - "alta-establecimiento.jsp" por dentro tiene unas características que se describen en este ejemplo:
  
- 	https://spring.io/guides/gs/handling-form-submission
+ 	https://www.baeldung.com/spring-boot-jsp
  
  báicamente, se requiere que el atributo "action" del formulario sea un POST a un endpoint existente que recibirá los datos para hacer el alta
  
