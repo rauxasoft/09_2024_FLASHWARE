@@ -6,16 +6,7 @@
  	<title>FlashWare</title>
 </head>
 <body>
-	<nav>
-		<h1>FlashWare</h1>
-		<p>Actualmente ya tienes ${numeroProductos} productos donde elegir!</p>
-		<ul>
-			<li><a href="/app/home">Home</a></li>
-			<li><a href="/app/listado-establecimientos">Establecimientos</a></li>
-			<li><a href="/app/listado-productos">Productos</a></li>
-		</ul>
-	</nav>
-	<hr>
+	<jsp:include page="nav.jsp"/>
 	<h2>Bienvenidos a FlashWare</h2>
 	<p>Vestibulum et tincidunt augue, non tempor felis. Vestibulum lacinia, sem ac vehicula dictum, mi orci suscipit ante, ut lacinia elit massa in leo. Donec euismod neque at eleifend lacinia. Aliquam gravida euismod velit, tincidunt condimentum arcu rhoncus eu. Cras ut est nisl. Vivamus eget libero ac nunc maximus faucibus. Praesent finibus porttitor ante eget interdum. Pellentesque ornare, orci eget placerat bibendum, purus lacus tristique felis, eget auctor nunc lectus a eros. Aliquam laoreet luctus commodo.</p>
 	<img width="150px" height="180px" src="/img/bootsy.jpg" alt="imagen de bootsy"/>

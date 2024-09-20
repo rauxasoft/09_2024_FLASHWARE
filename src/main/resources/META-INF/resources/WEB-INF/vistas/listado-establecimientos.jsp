@@ -7,16 +7,7 @@
  	<title>FlashWare</title>
 </head>
 <body>
-	<nav>
-		<h1>FlashWare</h1>
-		<p>Actualmente ya tienes ${numeroProductos} productos donde elegir!</p>
-		<ul>
-			<li><a href="/app/home">Home</a></li>
-			<li><a href="/app/listado-establecimientos">Establecimientos</a></li>
-			<li><a href="/app/listado-productos">Productos</a></li>
-		</ul>
-	</nav>
-	<hr>
+	<jsp:include page="nav.jsp"/>
 	<h2>Listado de Establecimientos</h2>
 	<table>
 		<thead>
