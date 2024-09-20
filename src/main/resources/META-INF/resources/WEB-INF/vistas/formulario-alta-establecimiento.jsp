@@ -8,30 +8,50 @@
 </head>
 <body>
 	<jsp:include page="nav.jsp"/>
-	<h2>Listado de Establecimientos</h2>
-	<table>
-		<thead>
+	<h2>Alta Establecimiento</h2>
+	<form action="" method="POST">
+		<table>
 			<tr>
-				<th>Id</th>
-				<th>Nombre</th>
-				<th>Poblacion</th>
-				<th>Provincia</th>
-				<th>Teléfono</th>
-				<th>Email</th>
+				<th style="text-align: right;">Nombre</th>
+				<td><input type="text" name="nombre"/></td>
 			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="establecimiento" items="${establecimientos}">
 			<tr>
-				<td>${establecimiento.id}</td>
-				<td>${establecimiento.nombre}</td>
-				<td>${establecimiento.direccion.poblacion}</td>
-				<td>${establecimiento.direccion.provincia}</td>
-				<td>${establecimiento.datosContacto.telefonoMovil}</td>
-				<td>${establecimiento.datosContacto.email}</td>
+				<th style="text-align: right;">Dirección</th>
+				<td><input type="text" name="direccion"/></td>
 			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			<tr>
+				<th style="text-align: right;">Población</th>
+				<td><input type="text" name="poblacion"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: right;">Código Postal</th>
+				<td><input type="text" name="codigoPostal"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: right;">Provincia</th>
+				<td><input type="text" name="provincia"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: right;">País</th>
+				<td><input type="text" name="pais"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: right;">Teléfono</th>
+				<td><input type="text" name="telefono"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: right;">Móvil</th>
+				<td><input type="text" name="movil"/></td>
+			</tr>
+			<tr>
+				<th style="text-align: right;">Email</th>
+				<td><input type="text" name="email"/></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><span style="text-align: right;"><input type="submit" value="Alta Establecimiento"/></span></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>
