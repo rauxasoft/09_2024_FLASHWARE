@@ -19,3 +19,16 @@
  Número total de productos
  Número total de productos y precios medios por categorias 
  
+ 4.- Crear un formulario para dar de alta Establecimientos
+ 
+ Material:
+ 
+ - Una página JSP que contenga el formulario. Por ejemplo "alta-establecimiento.jsp"
+ - Un controlador que mediante un método GET me devuelva el formulario. Por ejemplo: GET /app/formulario-alta-establecimiento
+ - "alta-establecimiento.jsp" por dentro tiene unas características que se describen en este ejemplo:
+ 
+ 
+ 
+ báicamente, se requiere que el atributo "action" del formulario sea un POST a un endpoint existente que recibirá los datos para hacer el alta
+ 
+ - Un controlador que mediante el método POST se haga cargo de recepcionar los datos que provienen del formulario para efectuar el alta o notificar cualquier error.

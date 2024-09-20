@@ -12,6 +12,10 @@ server.port = 8080
 
 spring.application.name=flashware
 
+## _Aplicación de gestión FlashWare_
+
+- /app/home
+
 ## _Swagger_
 
 - /swagger-ui.html
