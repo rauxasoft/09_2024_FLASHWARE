@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.sinensia.flashware.backend.business.config.BusinessException;
+import com.sinensia.flashware.backend.business.model.DatosContacto;
+import com.sinensia.flashware.backend.business.model.Direccion;
 import com.sinensia.flashware.backend.business.model.Establecimiento;
 import com.sinensia.flashware.backend.business.services.EstablecimientoServices;
 
@@ -35,16 +39,30 @@ public class AppEstablecimientosController {
 	@GetMapping("/formulario-alta-establecimiento")
 	public String getFormularioAlta(Model model) {
 		
-		model.addAttribute("establecimiento", new Establecimiento());
+		Establecimiento establecimiento = new Establecimiento();
+		establecimiento.setNombre("ABCDEFG");
+		establecimiento.setDatosContacto(new DatosContacto());
+		establecimiento.setDireccion(new Direccion());
+		
+		model.addAttribute("establecimiento", establecimiento);
 		
 		return "formulario-alta-establecimiento";
 	}
 	
 	@PostMapping("/crear-establecimiento")
-	public String crearEstablecimiento(@ModelAttribute("establecimiento") Establecimiento establecimiento) {
+	public RedirectView crearEstablecimiento(@ModelAttribute("establecimiento") Establecimiento establecimiento) {
 		
-		System.out.println("Vamos a crear el establecimiento: " +  establecimiento);
+		try {
+			establecimientoServices.create(establecimiento);
+		} catch (BusinessException e) {
+
+			// TODO Decidir qué hacer!
+			
+			e.printStackTrace();
+		}
 		
-		return "formulario-alta-establecimiento";
+		RedirectView redirectView = new RedirectView();
+	    redirectView.setUrl("http://localhost:8080/app/listado-establecimientos");
+	    return redirectView;
 	}
 }

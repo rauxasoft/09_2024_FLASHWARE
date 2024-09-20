@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,49 +10,51 @@
 <body>
 	<jsp:include page="nav.jsp"/>
 	<h2>Alta Establecimiento</h2>
-	<form action="" method="POST">
+	<form:form action="crear-establecimiento" method="POST" modelAttribute="establecimiento">
 		<table>
 			<tr>
 				<th style="text-align: right;">Nombre</th>
-				<td><input type="text" name="nombre"/></td>
+				<td><form:input type="text" path="nombre"/></td>
 			</tr>
 			<tr>
 				<th style="text-align: right;">Dirección</th>
-				<td><input type="text" name="direccion"/></td>
+				<td><form:input type="text" path="direccion.direccion"/></td>
 			</tr>
 			<tr>
 				<th style="text-align: right;">Población</th>
-				<td><input type="text" name="poblacion"/></td>
+				<td><form:input type="text" path="direccion.poblacion"/></td>
 			</tr>
 			<tr>
 				<th style="text-align: right;">Código Postal</th>
-				<td><input type="text" name="codigoPostal"/></td>
+				<td><form:input type="text" path="direccion.codigoPostal"/></td>
 			</tr>
 			<tr>
 				<th style="text-align: right;">Provincia</th>
-				<td><input type="text" name="provincia"/></td>
+				<td><form:input type="text" path="direccion.provincia"/></td>
 			</tr>
 			<tr>
 				<th style="text-align: right;">País</th>
-				<td><input type="text" name="pais"/></td>
+				<td><form:input type="text" path="direccion.pais"/></td>
 			</tr>
+			 
 			<tr>
 				<th style="text-align: right;">Teléfono</th>
-				<td><input type="text" name="telefono"/></td>
+				<td><form:input type="text" path="datosContacto.telefonoFijo"/></td>
 			</tr>
 			<tr>
 				<th style="text-align: right;">Móvil</th>
-				<td><input type="text" name="movil"/></td>
+				<td><form:input type="text" path="datosContacto.telefonoMovil"/></td>
 			</tr>
 			<tr>
 				<th style="text-align: right;">Email</th>
-				<td><input type="text" name="email"/></td>
-			</tr>
+				<td><form:input type="text" path="datosContacto.email"/></td>
+			</tr> 
 			<tr>
 				<th></th>
 				<td><span style="text-align: right;"><input type="submit" value="Alta Establecimiento"/></span></td>
 			</tr>
+			
 		</table>
-	</form>
+	</form:form>
 </body>
 </html>
