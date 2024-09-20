@@ -1,0 +1,21 @@
+1.- Crear un fragmento común de jsp para la cabecera y que se pueda inyectar en todas las páginas.
+
+2.- Crear un listado de pedidos.
+
+- La página debe mostrar las columnas:
+
+ - Número de Pedido
+ - Fecha
+ - Hora
+ - Nombre completo del técnico
+ - Estado del pedido
+ 
+ De estas columnas:
+ 
+ Número Pedido --> debe tener un link que nos permita cargar el pedido para visualizar TODA la información de dicho pedido.
+  
+ 3.- Crear una página que muestre las estadísticas. 
+ 
+ Número total de productos
+ Número total de productos y precios medios por categorias 
+ 

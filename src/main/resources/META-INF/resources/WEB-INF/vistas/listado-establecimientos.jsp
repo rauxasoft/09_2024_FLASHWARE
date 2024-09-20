@@ -18,7 +18,6 @@
 	</nav>
 	<hr>
 	<h2>Listado de Establecimientos</h2>
-	
 	<table>
 		<thead>
 			<tr>
@@ -43,7 +42,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
-	
 </body>
 </html>

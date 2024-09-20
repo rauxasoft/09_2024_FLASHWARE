@@ -17,7 +17,7 @@ public class AppHomeController {
 	@Autowired
 	private ProductoServices productoServices;
 
-	@GetMapping("/home")
+	@GetMapping({"/home",""})
 	public ModelAndView getPaginaHome(HttpServletRequest request, ModelAndView mav) {
 		
 		int numeroProductos = productoServices.getNumeroTotalProductos();

@@ -19,7 +19,6 @@
 	</nav>
 	<hr>
 	<h2>Listado de Productos</h2>
-	
 	<table style="width: 100%;">
 		<thead>
 			<tr>
@@ -39,12 +38,14 @@
 				<td style="text-align: left;">${producto.nombre}</td>
 				<td style="text-align: center;">${producto.categoria}</td>
 				<td style="text-align: right;">${producto.precio}</td>
-				<td style="text-align: center;"><c:if test="${producto.descatalogado}"><span style="color:red;">DESCATALOGADO</span> </c:if>   </td>
+				<td style="text-align: center;">
+					<c:if test="${producto.descatalogado}">
+						<span style="color:red;">DESCATALOGADO</span>
+					</c:if>
+				</td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	
-	
 </body>
 </html>
