@@ -40,7 +40,7 @@ public class AppEstablecimientosController {
 	public String getFormularioAlta(Model model) {
 		
 		Establecimiento establecimiento = new Establecimiento();
-		establecimiento.setNombre("ABCDEFG");
+	
 		establecimiento.setDatosContacto(new DatosContacto());
 		establecimiento.setDireccion(new Direccion());
 		
