@@ -54,7 +54,7 @@ public class ProductoServicesImpl implements ProductoServices{
 		boolean existe = productoRepository.existsById(codigo);
 		
 		if(!existe) {
-			throw new BusinessException("El producto " + codigo + " no existe. No se puede eliminar", true);
+			throw new BusinessException("El producto " + codigo + " no existe. No se puede actualizar.", true);
 		}
 		
 		productoRepository.save(producto);

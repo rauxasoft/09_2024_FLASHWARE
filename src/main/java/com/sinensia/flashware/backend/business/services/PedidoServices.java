@@ -23,7 +23,7 @@ public interface PedidoServices {
 	 * Si el pedido no existe lanza BusinessException
 	 * 
 	 */
-	void update(Pedido producto) throws BusinessException;								
+	void update(Pedido pedido) throws BusinessException;								
 	
 	/**
 	 * Si el número no existe lanza BusinessException

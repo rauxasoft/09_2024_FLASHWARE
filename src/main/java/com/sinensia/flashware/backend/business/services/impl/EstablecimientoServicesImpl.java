@@ -12,6 +12,8 @@ import com.sinensia.flashware.backend.business.model.Establecimiento;
 import com.sinensia.flashware.backend.business.services.EstablecimientoServices;
 import com.sinensia.flashware.backend.integration.repositories.EstablecimientoRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 @Primary
 public class EstablecimientoServicesImpl implements EstablecimientoServices{
@@ -20,20 +22,39 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices{
 	private EstablecimientoRepository establecimientoRepository;
 	
 	@Override
+	@Transactional
 	public Long create(Establecimiento establecimiento) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(establecimiento.getId() != null) {
+			throw new BusinessException("El ID del establecimiento ha de ser NULL", true);
+		}
+		
+		Long id = System.currentTimeMillis();
+		establecimiento.setId(id);
+		
+		establecimientoRepository.save(establecimiento);
+		
+		return id;
 	}
 
 	@Override
 	public Optional<Establecimiento> read(Long id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return establecimientoRepository.findById(id);
 	}
 
 	@Override
+	@Transactional
 	public void update(Establecimiento establecimiento) throws BusinessException {
-		// TODO Auto-generated method stub
+
+		Long id = establecimiento.getId();
+		
+		boolean existe = establecimientoRepository.existsById(id);
+		
+		if(!existe) {
+			throw new BusinessException("El establecimiento " + id + " no existe. No se puede actualizar.", true);
+		}
+		
+		establecimientoRepository.save(establecimiento);
 		
 	}
 

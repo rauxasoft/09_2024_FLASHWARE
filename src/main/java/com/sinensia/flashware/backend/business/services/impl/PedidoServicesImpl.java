@@ -12,6 +12,8 @@ import com.sinensia.flashware.backend.business.model.Pedido;
 import com.sinensia.flashware.backend.business.services.PedidoServices;
 import com.sinensia.flashware.backend.integration.repositories.PedidoRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 @Primary
 public class PedidoServicesImpl implements PedidoServices {
@@ -23,9 +25,19 @@ public class PedidoServicesImpl implements PedidoServices {
 	}
 	
 	@Override
+	@Transactional
 	public Long create(Pedido pedido) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(pedido.getNumero() != null) {
+			throw new BusinessException("El código del pedido ha de ser NULL", true);
+		}
+		
+		Long numero = System.currentTimeMillis();
+		pedido.setNumero(numero);
+		
+		pedidoRepository.save(pedido);
+		
+		return numero;
 	}
 
 	@Override
@@ -34,15 +46,32 @@ public class PedidoServicesImpl implements PedidoServices {
 	}
 
 	@Override
-	public void update(Pedido producto) throws BusinessException {
-		// TODO Auto-generated method stub
+	@Transactional
+	public void update(Pedido pedido) throws BusinessException {
+		
+		Long numero = pedido.getNumero();
+		
+		boolean existe = pedidoRepository.existsById(numero);
+		
+		if(!existe) {
+			throw new BusinessException("El pedido " + numero + " no existe. No se puede actualizar.", true);
+		}
+		
+		pedidoRepository.save(pedido);
 		
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long numero) throws BusinessException {
-		// TODO Auto-generated method stub
+		boolean existe = pedidoRepository.existsById(numero);
 		
+		if(!existe) {
+			throw new BusinessException("El pedido " + numero + " no existe. No se puede eliminar.", true);
+		}
+		
+		pedidoRepository.deleteById(numero);
+	
 	}
 
 	@Override
