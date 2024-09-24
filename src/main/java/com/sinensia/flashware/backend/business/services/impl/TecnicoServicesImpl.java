@@ -2,7 +2,6 @@ package com.sinensia.flashware.backend.business.services.impl;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.flashware.backend.business.config.BusinessException;
@@ -13,7 +12,6 @@ import com.sinensia.flashware.backend.integration.repositories.TecnicoRepository
 import jakarta.transaction.Transactional;
 
 @Service
-@Primary
 public class TecnicoServicesImpl implements TecnicoServices{
 
 	private final TecnicoRepository tecnicoRepository;

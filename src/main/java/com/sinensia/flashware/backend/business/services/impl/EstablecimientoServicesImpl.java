@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.flashware.backend.business.config.BusinessException;
@@ -15,7 +14,6 @@ import com.sinensia.flashware.backend.integration.repositories.EstablecimientoRe
 import jakarta.transaction.Transactional;
 
 @Service
-@Primary
 public class EstablecimientoServicesImpl implements EstablecimientoServices{
 
 	@Autowired
