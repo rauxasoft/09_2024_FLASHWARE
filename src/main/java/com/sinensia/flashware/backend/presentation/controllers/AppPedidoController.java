@@ -32,9 +32,7 @@ public class AppPedidoController {
 	
 	@GetMapping("/pedido")
 	public ModelAndView getPedido(ModelAndView mav,@RequestParam("numero")  Long numero) {
-		
-		System.out.println("Número: " + numero);
-		
+	
 		Optional<Pedido> optional = pedidoServices.read(numero);
 		
 		if(optional.isPresent()) {
