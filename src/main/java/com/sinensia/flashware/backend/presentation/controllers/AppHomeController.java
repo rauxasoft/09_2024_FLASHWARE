@@ -8,8 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sinensia.flashware.backend.business.services.ProductoServices;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping("/app")
 public class AppHomeController {
@@ -18,13 +16,10 @@ public class AppHomeController {
 	private ProductoServices productoServices;
 
 	@GetMapping({"/home",""})
-	public ModelAndView getPaginaHome(HttpServletRequest request, ModelAndView mav) {
+	public ModelAndView getPaginaHome(ModelAndView mav) {
 		
 		int numeroProductos = productoServices.getNumeroTotalProductos();
-		String ip = request.getRemoteAddr();
-		
-		System.out.println("Petición realizada por: " + ip);
-		
+	
 		mav.addObject("numeroProductos", numeroProductos);
 		mav.setViewName("home");
 		
