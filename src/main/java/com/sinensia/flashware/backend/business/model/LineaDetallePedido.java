@@ -2,10 +2,18 @@ package com.sinensia.flashware.backend.business.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Embeddable
 public class LineaDetallePedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	@ManyToOne
+	@JoinColumn(name="CODIGO_PRODUCTO")
 	private Producto producto;
+	
 	private int cantidad; 
 	private double precio;
 	
