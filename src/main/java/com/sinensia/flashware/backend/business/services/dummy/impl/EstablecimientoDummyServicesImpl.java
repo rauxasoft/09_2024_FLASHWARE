@@ -1,4 +1,4 @@
-package com.sinensia.flashware.backend.business.services.impl;
+package com.sinensia.flashware.backend.business.services.dummy.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +13,11 @@ import com.sinensia.flashware.backend.business.model.Establecimiento;
 import com.sinensia.flashware.backend.business.services.EstablecimientoServices;
 
 @Service
-public class EstablecimientoServicesImpl implements EstablecimientoServices{
+public class EstablecimientoDummyServicesImpl implements EstablecimientoServices{
 
 	private final TreeMap<Long, Establecimiento> ESTABLECIMIENTOS_DB = new TreeMap<>();
 	
-	public EstablecimientoServicesImpl() {
+	public EstablecimientoDummyServicesImpl() {
 		initObjects();
 	}
 	

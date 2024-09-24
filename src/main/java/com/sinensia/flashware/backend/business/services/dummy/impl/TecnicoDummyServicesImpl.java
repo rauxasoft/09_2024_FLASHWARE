@@ -1,4 +1,4 @@
-package com.sinensia.flashware.backend.business.services.impl;
+package com.sinensia.flashware.backend.business.services.dummy.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +12,11 @@ import com.sinensia.flashware.backend.business.model.Tecnico;
 import com.sinensia.flashware.backend.business.services.TecnicoServices;
 
 @Service
-public class TecnicoServicesImpl implements TecnicoServices{
+public class TecnicoDummyServicesImpl implements TecnicoServices{
 
 	private final TreeMap<Long, Tecnico> TECNICOS_DB = new TreeMap<>();
 	
-	public TecnicoServicesImpl() {
+	public TecnicoDummyServicesImpl() {
 		initObjects();
 	}
 	

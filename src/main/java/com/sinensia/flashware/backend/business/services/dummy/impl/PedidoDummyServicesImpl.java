@@ -1,4 +1,4 @@
-package com.sinensia.flashware.backend.business.services.impl;
+package com.sinensia.flashware.backend.business.services.dummy.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,11 +24,11 @@ import com.sinensia.flashware.backend.business.model.Tecnico;
 import com.sinensia.flashware.backend.business.services.PedidoServices;
 
 @Service
-public class PedidoServicesImpl implements PedidoServices{
+public class PedidoDummyServicesImpl implements PedidoServices{
 
 	private final TreeMap<Long, Pedido> PEDIDOS_DB = new TreeMap<>();
 	
-	public PedidoServicesImpl() {
+	public PedidoDummyServicesImpl() {
 		initObjects();
 	}
 	
