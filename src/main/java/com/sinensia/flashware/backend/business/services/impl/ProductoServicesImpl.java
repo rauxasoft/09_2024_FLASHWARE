@@ -40,13 +40,24 @@ public class ProductoServicesImpl implements ProductoServices{
 	}
 
 	@Override
+	@Transactional
 	public Optional<Producto> read(Long codigo) {
 		return productoRepository.findById(codigo);
 	}
 
 	@Override
+	@Transactional
 	public void update(Producto producto) throws BusinessException {
-		// TODO Auto-generated method stub
+		
+		Long codigo = producto.getCodigo();
+		
+		boolean existe = productoRepository.existsById(codigo);
+		
+		if(!existe) {
+			throw new BusinessException("El producto " + codigo + " no existe. No se puede actualizar", true);
+		}
+		
+		productoRepository.save(producto);
 		
 	}
 
