@@ -54,7 +54,7 @@ public class ProductoServicesImpl implements ProductoServices{
 		boolean existe = productoRepository.existsById(codigo);
 		
 		if(!existe) {
-			throw new BusinessException("El producto " + codigo + " no existe. No se puede actualizar", true);
+			throw new BusinessException("El producto " + codigo + " no existe. No se puede eliminar", true);
 		}
 		
 		productoRepository.save(producto);
@@ -62,9 +62,16 @@ public class ProductoServicesImpl implements ProductoServices{
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long codigo) throws BusinessException {
-		// TODO Auto-generated method stub
 		
+		boolean existe = productoRepository.existsById(codigo);
+		
+		if(!existe) {
+			throw new BusinessException("El producto " + codigo + " no existe. No se puede actualizar", true);	
+		}
+		
+		productoRepository.deleteById(codigo);
 	}
 
 	@Override
