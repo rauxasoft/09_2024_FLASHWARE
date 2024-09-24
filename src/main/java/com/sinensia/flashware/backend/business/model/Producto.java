@@ -4,15 +4,32 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+@Entity
+@Table(name="PRODUCTOS")
 public class Producto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	private Long codigo;
+	
 	private String nombre;
 	private String descripcion;
+	
+	@Temporal(TemporalType.DATE)
 	private Date fechaAlta;
+	
 	private Double precio;
 	private Boolean descatalogado;
+	
+	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
 	public Producto() {
