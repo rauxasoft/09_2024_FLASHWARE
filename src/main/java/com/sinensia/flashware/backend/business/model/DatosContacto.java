@@ -2,6 +2,9 @@ package com.sinensia.flashware.backend.business.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class DatosContacto implements Serializable {
 	private static final long serialVersionUID = 1L;
 

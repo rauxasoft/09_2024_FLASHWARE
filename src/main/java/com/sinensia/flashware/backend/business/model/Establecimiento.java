@@ -3,12 +3,29 @@ package com.sinensia.flashware.backend.business.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="ESTABLECIMIENTOS")
 public class Establecimiento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private Long id;
+	
 	private String nombre;
-	private Direccion direccion;	
+	
+	@Embedded
+	@AttributeOverrides({@AttributeOverride(name="codigoPostal", column=@Column(name="C_POSTAL"))})
+	private Direccion direccion;
+	
+	@Embedded
 	private DatosContacto datosContacto;
 	
 	public Establecimiento() {

@@ -2,12 +2,15 @@ package com.sinensia.flashware.backend.business.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Direccion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String direccion;
 	private String poblacion;
-	private String codigoPostal; 
+	private String codigoPostal;
 	private String provincia;
 	private String pais;
 	
