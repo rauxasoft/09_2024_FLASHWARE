@@ -93,8 +93,7 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public int getNumeroTotalProductos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) productoRepository.count();
 	}
 
 	@Override
