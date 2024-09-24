@@ -95,7 +95,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Alfombrilla Mouse R.Madrid ***\",\r\n    \"descripcion\": \"Fantástica alfombrilla... ****\",\r\n    \"fechaAlta\": \"2021-10-31T23:00:00.000+00:00\",\r\n    \"precio\": 1.0,\r\n    \"descatalogado\": false,\r\n    \"categoria\": \"HARDWARE\"\r\n}",
+							"raw": "{\r\n    \"codigo\": 100,\r\n    \"nombre\": \"Impresora Laser HP 2P (UPDATED BY POSTMAN)\",\r\n    \"descripcion\": \"Impresora Laser de gran calidad.\",\r\n    \"fechaAlta\": \"2019-04-20\",\r\n    \"precio\": 666.0,\r\n    \"descatalogado\": true,\r\n    \"categoria\": \"HARDWARE\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -132,6 +132,228 @@
 							"path": [
 								"productos",
 								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PEDIDOS",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY NUMERO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pedidos/45677",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedidos",
+								"45677"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"fechaHora\": \"2024-09-22T22:00:00.000+00:00\",\r\n    \"estado\": \"NUEVO\",\r\n    \"cliente\": {\"id\": 54},\r\n    \"tecnico\": {\"id\": 50},\r\n    \"establecimiento\": {\"id\": 1000},\r\n    \"lineas\": [\r\n        {\r\n            \"producto\": {\"codigo\": 108},\r\n            \"cantidad\": 50,\r\n            \"precio\": 9.6\r\n        },\r\n        {\r\n            \"producto\": {\"codigo\": 107},\r\n            \"cantidad\": 4,\r\n            \"precio\": 10.0\r\n        }\r\n\r\n    ],\r\n    \"observaciones\": \"Recoger en tienda\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fechaHora\": \"2024-09-22T22:00:00.000+00:00\",\r\n    \"estado\": \"NUEVO\",\r\n    \"cliente\": {\"id\": 54},\r\n    \"tecnico\": {\"id\": 50},\r\n    \"establecimiento\": {\"id\": 1000},\r\n    \"lineas\": [\r\n        {\r\n            \"producto\": {\"codigo\": 108},\r\n            \"cantidad\": 170,\r\n            \"precio\": 4\r\n        },\r\n        {\r\n            \"producto\": {\"codigo\": 107},\r\n            \"cantidad\": 4,\r\n            \"precio\": 10.0\r\n        }\r\n\r\n    ],\r\n    \"observaciones\": \"Recoger en tienda (ACTUALIZADO)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pedidos/45677",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedidos",
+								"45677"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"fechaHora\": \"2024-09-22T22:00:00.000+00:00\",\r\n    \"estado\": \"NUEVO\",\r\n    \"cliente\": {\"id\": 54},\r\n    \"tecnico\": {\"id\": 50},\r\n    \"establecimiento\": {\"id\": 1000},\r\n    \"lineas\": [\r\n        {\r\n            \"producto\": {\"codigo\": 108},\r\n            \"cantidad\": 50,\r\n            \"precio\": 9.6\r\n        },\r\n        {\r\n            \"producto\": {\"codigo\": 107},\r\n            \"cantidad\": 4,\r\n            \"precio\": 10.0\r\n        }\r\n\r\n    ],\r\n    \"observaciones\": \"Recoger en tienda\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pedidos/45677",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedidos",
+								"45677"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ESTABLECIMIENTOS",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/establecimientos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"establecimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/establecimientos/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"establecimientos",
+								"1000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CLIENTES",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TECNICOS",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/tecnicos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tecnicos"
 							]
 						}
 					},
