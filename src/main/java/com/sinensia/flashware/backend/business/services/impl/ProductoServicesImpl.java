@@ -1,5 +1,6 @@
 package com.sinensia.flashware.backend.business.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Categoria;
 import com.sinensia.flashware.backend.business.model.Producto;
+import com.sinensia.flashware.backend.business.model.dtos.ProductoDTO1;
+import com.sinensia.flashware.backend.business.model.dtos.ProductoDTO2;
 import com.sinensia.flashware.backend.business.services.ProductoServices;
 import com.sinensia.flashware.backend.integration.repositories.ProductoRepository;
 
@@ -118,6 +121,29 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public Map<Categoria, Double> getEstadisticaPrecioMedioProductos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProductoDTO1> getAllProductoDTO1() {
+		
+		List<Object[]> resultados = productoRepository.findProductoDTO1();
+		
+		List<ProductoDTO1> productosDTO1 = new ArrayList<>();
+		
+		for(Object[] fila: resultados) {
+			Long codigo = (Long) fila[0];
+			String nombre = (String) fila[1];
+			Double precio = (Double) fila[2];
+			productosDTO1.add(new ProductoDTO1(codigo, nombre, precio));
+		}
+		
+		return productosDTO1;
+	}
+
+	@Override
+	public List<ProductoDTO2> getAllProductoDTO2() {
 		// TODO Auto-generated method stub
 		return null;
 	}

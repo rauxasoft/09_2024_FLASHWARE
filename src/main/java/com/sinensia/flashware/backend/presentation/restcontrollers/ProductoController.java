@@ -21,6 +21,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Producto;
+import com.sinensia.flashware.backend.business.model.dtos.ProductoDTO1;
+import com.sinensia.flashware.backend.business.model.dtos.ProductoDTO2;
 import com.sinensia.flashware.backend.business.services.ProductoServices;
 import com.sinensia.flashware.backend.presentation.config.PresentationException;
 
@@ -80,6 +82,22 @@ public class ProductoController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long codigo) throws BusinessException {
 		productoServices.delete(codigo);
+	}
+	
+	// ************************************************************************
+	//
+	// DTOs
+	//
+	// ************************************************************************
+	
+	@GetMapping("/productoDTO1")
+	public List<ProductoDTO1> getAllProductoDTO1(){
+		return productoServices.getAllProductoDTO1();
+	}
+	
+	@GetMapping("/productoDTO2")
+	public List<ProductoDTO2> getAllProductoDTO2(){
+		return productoServices.getAllProductoDTO2();
 	}
 	
 }

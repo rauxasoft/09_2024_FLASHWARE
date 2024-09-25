@@ -7,6 +7,8 @@ import java.util.Optional;
 import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Categoria;
 import com.sinensia.flashware.backend.business.model.Producto;
+import com.sinensia.flashware.backend.business.model.dtos.ProductoDTO1;
+import com.sinensia.flashware.backend.business.model.dtos.ProductoDTO2;
 
 public interface ProductoServices {
 
@@ -66,4 +68,14 @@ public interface ProductoServices {
 	 */
 	Map<Categoria, Double> getEstadisticaPrecioMedioProductos();
 	
+	// ************************************************************************
+	//
+	// DTOs
+	//
+	// ************************************************************************
+
+	List<ProductoDTO1> getAllProductoDTO1();
+	
+	List<ProductoDTO2> getAllProductoDTO2();
+
 }
