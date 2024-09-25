@@ -16,7 +16,10 @@ INSERT INTO PRODUCTOS (CODIGO, NOMBRE, DESCRIPCION, FECHA_ALTA, PRECIO, DESCATAL
 (106, 'Alfombrilla Mouse Bob Esponja', 'Fantástica alfombrilla de nuestro amigo Bob Esponja', '2019-04-25', 10.00, FALSE, 'CONSUMIBLE'),
 (107, 'Alfombrilla Mouse Rayo McQueen', 'Fantástica alfombrilla de la película Cars', '2019-04-25', 10.00, FALSE, 'CONSUMIBLE'),
 (108, 'Alfombrilla Mouse Torrente', 'Fantástica alfombrilla de nuestro amigo Torrente', '2019-04-25', 10.00, TRUE, 'CONSUMIBLE'),
-(109, 'Alfombrilla Mouse The Penguin', 'Fantástica alfombrilla del personaje de Batman', '2019-04-25', 10.00, FALSE, 'CONSUMIBLE');
+(109, 'Alfombrilla Mouse The Penguin', 'Fantástica alfombrilla del personaje de Batman', '2019-04-25', 10.00, FALSE, 'CONSUMIBLE'),
+(110, 'Mouse Logitech Arcus 20', 'Mouse ergonómico y muy robusto', '2019-04-27', 21.00, FALSE, 'HARDWARE'),
+(111, 'Mouse Logitech i12 wireless', 'Mouse bluetooth', '2019-04-27', 37.40, FALSE, 'HARDWARE'),
+(112, 'Ordenador Epson Desktop - Family i5 16Gb Elite (BLACK)', 'Ordenador de escritorio de última generación', '2019-04-25', 1200.00, FALSE, 'HARDWARE');
 
 INSERT INTO ESTABLECIMIENTOS (ID, NOMBRE, DIRECCION, POBLACION, C_POSTAL, PROVINCIA, PAIS, TELEFONO_MOVIL, TELEFONO_FIJO, EMAIL) VALUES
 (1000, 'FlashWare GRAN VIA II', 'Avda. De Les Corts Catalanes, 245', 'Barcelona', '08034', 'Barcelona', 'España', '620897056', '93 2209087', 'granvia@flashware.com'),
@@ -25,11 +28,11 @@ INSERT INTO ESTABLECIMIENTOS (ID, NOMBRE, DIRECCION, POBLACION, C_POSTAL, PROVIN
 -- NUEVO, EN_PROCESO, PENDIENTE_ENTREGA, CANCELADO, SERVIDO;
 
 INSERT INTO PEDIDOS (NUMERO, FECHA_HORA, ESTADO, ID_CLIENTE, ID_TECNICO, ID_ESTABLECIMIENTO, OBSERVACIONES) VALUES 
-(45677, '2024-09-23', 'SERVIDO', 54, 50, 1000, 'Recoger en tienda'),
-(45678, '2024-09-23', 'CANCELADO', NULL, 50, 1000, NULL),
-(45679, '2024-09-23', 'SERVIDO', NULL, 53, 1001, NULL),
-(45680, '2024-09-24', 'EN_PROCESO', NULL, 50, 1000, 'Entregar desmontado. El cliente se encarga del ensamblaje'),
-(45681, '2024-09-24', 'NUEVO', 51, 52, 1001, NULL);
+(45677, {ts '2024-09-23 11:47'}, 'SERVIDO', 54, 50, 1000, 'Recoger en tienda'),
+(45678, {ts '2024-09-23 11:52'}, 'CANCELADO', NULL, 50, 1000, NULL),
+(45679, {ts '2024-09-23 11:58'}, 'SERVIDO', NULL, 53, 1001, NULL),
+(45680, {ts '2024-09-23 12:15'}, 'EN_PROCESO', NULL, 50, 1000, 'Entregar desmontado. El cliente se encarga del ensamblaje'),
+(45681, {ts '2024-09-23 12:21'}, 'NUEVO', 51, 52, 1001, NULL);
 
 INSERT INTO LINEAS_PEDIDO (NUMERO_PEDIDO, CODIGO_PRODUCTO, CANTIDAD, PRECIO) VALUES 
 (45677, 108, 50,   9.60),
