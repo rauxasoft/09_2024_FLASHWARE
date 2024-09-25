@@ -25,8 +25,6 @@ INSERT INTO ESTABLECIMIENTOS (ID, NOMBRE, DIRECCION, POBLACION, C_POSTAL, PROVIN
 (1000, 'FlashWare GRAN VIA II', 'Avda. De Les Corts Catalanes, 245', 'Barcelona', '08034', 'Barcelona', 'España', '620897056', '93 2209087', 'granvia@flashware.com'),
 (1001, 'FlashWare La Vaguada', 'c/ Lope de Vega, 23', 'Madrid', '89077', 'Madrid', 'España', '629897052', '91 225 89 72', 'vaguada@flashware.com');
 
--- NUEVO, EN_PROCESO, PENDIENTE_ENTREGA, CANCELADO, SERVIDO;
-
 INSERT INTO PEDIDOS (NUMERO, FECHA_HORA, ESTADO, ID_CLIENTE, ID_TECNICO, ID_ESTABLECIMIENTO, OBSERVACIONES) VALUES 
 (45677, {ts '2024-09-23 11:47'}, 'SERVIDO', 54, 50, 1000, 'Recoger en tienda'),
 (45678, {ts '2024-09-23 11:52'}, 'CANCELADO', NULL, 50, 1000, NULL),

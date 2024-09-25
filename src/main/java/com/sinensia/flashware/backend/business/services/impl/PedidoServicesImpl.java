@@ -79,20 +79,17 @@ public class PedidoServicesImpl implements PedidoServices {
 
 	@Override
 	public List<Pedido> getBetweenDates(Date desde, Date hasta) {
-		// TODO Auto-generated method stub
-		return null;
+		return pedidoRepository.findByFechaHoraBetweenOrderByFechaHora(desde, hasta);
 	}
 
 	@Override
 	public List<Pedido> getByEstablecimiento(Long idEstablecimiento) {
-		// TODO Auto-generated method stub
-		return null;
+		return pedidoRepository.findByEstablecimientoId(idEstablecimiento);
 	}
 
 	@Override
 	public int getNumeroTotalPedidos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) pedidoRepository.count();
 	}
 
 	@Override
