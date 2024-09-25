@@ -141,11 +141,10 @@ public class ProductoServicesImpl implements ProductoServices{
 		
 		return productosDTO1;
 	}
-
+	
 	@Override
-	public List<ProductoDTO2> getAllProductoDTO2() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductoDTO2> getAllProductoDTO2(){
+		return productoRepository.findProductoDTO2();
 	}
 
 }

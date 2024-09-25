@@ -10,7 +10,7 @@ public class ProductoDTO2 implements Serializable {
 	private String nombre;
 	
 	/**
-	 * Nos devuelve la descripción recortada a 20 caracteres.
+	 * Nos devuelve la descripción recortada a 30 caracteres.
 	 * Si la descripción supera los 30 caracteres, el recorte nos muestra puntos suspensivos. 
 	 * 
 	 * Ejemplo:
