@@ -21,7 +21,7 @@ public class EstablecimientoRepositoryTest {
 	@Test
 	void findByNombreLikeIgnoreCaseTest() {
 		
-		List<Establecimiento> establecimientos = establecimientoRepository.findByNombreLikeIgnoreCase("1");
+		List<Establecimiento> establecimientos = establecimientoRepository.findByNombreLikeIgnoreCase("nTO 1");
 		
 		assertEquals(1, establecimientos.size());
 		
