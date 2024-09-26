@@ -96,21 +96,19 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public int getNumeroTotalProductosByCategoria(Categoria categoria) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) productoRepository.contarNumeroProductosPorCategoria(categoria);
 	}
 
-	// ... WHERE p IN (:productos)
 	@Override
+	@Transactional
 	public void incrementarPrecio(List<Producto> productos, double porcentaje) {
-		// TODO Auto-generated method stub
-		
+		productoRepository.incrementarPrecio(productos, porcentaje);
 	}
 
 	@Override
+	@Transactional
 	public void incrementarPrecio(Long[] idProductos, double porcentaje) {
-		// TODO Auto-generated method stub
-		
+		productoRepository.incrementarPrecio(idProductos, porcentaje);
 	}
 
 	@Override

@@ -35,11 +35,26 @@ public class DemoBorrameController {
 	@Autowired
 	private EstablecimientoRepository establecimientoRepository;
 	
+	@GetMapping("/9")
+	public Integer prueba9(){
+		return productoServices.getNumeroTotalProductosByCategoria(Categoria.HARDWARE);
+	}
+	
+	@GetMapping("/8")
+	public String prueba8(){
+		
+		Long[] ids = {100L, 105L};
+		
+		productoServices.incrementarPrecio(ids, 100.0);
+		
+		return "Precios incrementados...";
+	}
+	
 	@GetMapping("/7")
 	public List<Establecimiento> prueba7(){
 		return establecimientoRepository.findByNombreLikeIgnoreCase("%guAda%");
 	}
-	
+
 	@GetMapping("/6")
 	public List<Pedido> prueba6(@RequestParam @DateTimeFormat(pattern="dd-MM-yyyy") Date desde, 
 							    @RequestParam @DateTimeFormat(pattern="dd-MM-yyyy") Date hasta){

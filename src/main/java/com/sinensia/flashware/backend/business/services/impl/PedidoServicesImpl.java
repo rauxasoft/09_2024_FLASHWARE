@@ -92,11 +92,9 @@ public class PedidoServicesImpl implements PedidoServices {
 		return (int) pedidoRepository.count();
 	}
 
-	// COUNT()
 	@Override
-	public int getNumeroTotalProductosByEstablecimiento(Long idEstablecimiento) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getNumeroTotalPedidosByEstablecimiento(Long idEstablecimiento) {
+		return (int) pedidoRepository.contarNumeroPedidosPorEstablecimiento(idEstablecimiento);
 	}
 
 }

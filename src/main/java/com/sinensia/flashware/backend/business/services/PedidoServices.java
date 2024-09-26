@@ -43,5 +43,5 @@ public interface PedidoServices {
 	
 	int getNumeroTotalPedidos();
 	
-	int getNumeroTotalProductosByEstablecimiento(Long idEstablecimiento);
+	int getNumeroTotalPedidosByEstablecimiento(Long idEstablecimiento);
 }
