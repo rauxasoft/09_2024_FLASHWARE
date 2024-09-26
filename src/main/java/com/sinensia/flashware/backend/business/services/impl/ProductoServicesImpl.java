@@ -100,6 +100,7 @@ public class ProductoServicesImpl implements ProductoServices{
 		return 0;
 	}
 
+	// ... WHERE p IN (:productos)
 	@Override
 	public void incrementarPrecio(List<Producto> productos, double porcentaje) {
 		// TODO Auto-generated method stub
