@@ -41,7 +41,6 @@ public class ProductoServicesImpl implements ProductoServices{
 	}
 
 	@Override
-	@Transactional
 	public Optional<Producto> read(Long codigo) {
 		return productoRepository.findById(codigo);
 	}

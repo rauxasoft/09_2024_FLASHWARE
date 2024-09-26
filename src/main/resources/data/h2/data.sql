@@ -19,11 +19,14 @@ INSERT INTO PRODUCTOS (CODIGO, NOMBRE, DESCRIPCION, FECHA_ALTA, PRECIO, DESCATAL
 (109, 'Alfombrilla Mouse The Penguin', 'Fantástica alfombrilla del personaje de Batman', '2019-04-25', 10.00, FALSE, 'CONSUMIBLE'),
 (110, 'Mouse Logitech Arcus 20', 'Mouse ergonómico y muy robusto', '2019-04-27', 21.00, FALSE, 'HARDWARE'),
 (111, 'Mouse Logitech i12 wireless', 'Mouse bluetooth', '2019-04-27', 37.40, FALSE, 'HARDWARE'),
-(112, 'Ordenador Epson Desktop - Family i5 16Gb Elite (BLACK)', 'Ordenador de escritorio de última generación', '2019-04-25', 1200.00, FALSE, 'HARDWARE');
+(112, 'Ordenador Epson Desktop - Family i5 16Gb Elite (BLACK)', 'Ordenador de escritorio de última generación', '2019-04-25', 1200.00, FALSE, 'HARDWARE'),
+(113, 'Ordenador Epson Desktop - Family i7 32Gb Elite (BLACK)', 'Ordenador de escritorio de última generación', '2019-04-25', 1870.00, FALSE, 'HARDWARE'),
+(114, 'PC-Tools v14', 'Software de gestión de ficheros y antivirus para novatos.', '2019-04-25', 29.99, FALSE, 'SOFTWARE'),
+(115, 'Ultra-Cleaner Spry 33cl', 'Líquido de limpieza de equipos. Protege la pantalla y la deja como nueva.', '2019-04-25', 14.70, FALSE, 'CONSUMIBLE');
 
 INSERT INTO ESTABLECIMIENTOS (ID, NOMBRE, DIRECCION, POBLACION, C_POSTAL, PROVINCIA, PAIS, TELEFONO_MOVIL, TELEFONO_FIJO, EMAIL) VALUES
 (1000, 'FlashWare GRAN VIA II', 'Avda. De Les Corts Catalanes, 245', 'Barcelona', '08034', 'Barcelona', 'España', '620897056', '93 2209087', 'granvia@flashware.com'),
-(1001, 'FlashWare La Vaguada', 'c/ Lope de Vega, 23', 'Madrid', '89077', 'Madrid', 'España', '629897052', '91 225 89 72', 'vaguada@flashware.com');
+(1001, 'FlashWare La Vaguadá', 'c/ Lope de Vega, 23', 'Madrid', '89077', 'Madrid', 'España', '629897052', '91 225 89 72', 'vaguada@flashware.com');
 
 INSERT INTO PEDIDOS (NUMERO, FECHA_HORA, ESTADO, ID_CLIENTE, ID_TECNICO, ID_ESTABLECIMIENTO, OBSERVACIONES) VALUES 
 (45677, {ts '2024-09-23 11:47'}, 'SERVIDO', 54, 50, 1000, 'Recoger en tienda'),

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sinensia.flashware.backend.business.model.Categoria;
+import com.sinensia.flashware.backend.business.model.Establecimiento;
 import com.sinensia.flashware.backend.business.model.Pedido;
 import com.sinensia.flashware.backend.business.model.Producto;
 import com.sinensia.flashware.backend.business.services.PedidoServices;
 import com.sinensia.flashware.backend.business.services.ProductoServices;
+import com.sinensia.flashware.backend.integration.repositories.EstablecimientoRepository;
 import com.sinensia.flashware.backend.integration.repositories.ProductoRepository;
 
 @RestController
@@ -29,6 +31,14 @@ public class DemoBorrameController {
 	
 	@Autowired
 	private ProductoRepository productoRepository;
+	
+	@Autowired
+	private EstablecimientoRepository establecimientoRepository;
+	
+	@GetMapping("/7")
+	public List<Establecimiento> prueba7(){
+		return establecimientoRepository.findByNombreLikeIgnoreCase("%guAda%");
+	}
 	
 	@GetMapping("/6")
 	public List<Pedido> prueba6(@RequestParam @DateTimeFormat(pattern="dd-MM-yyyy") Date desde, 
