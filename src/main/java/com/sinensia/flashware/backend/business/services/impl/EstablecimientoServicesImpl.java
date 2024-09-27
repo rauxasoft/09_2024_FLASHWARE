@@ -3,62 +3,44 @@ package com.sinensia.flashware.backend.business.services.impl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Establecimiento;
 import com.sinensia.flashware.backend.business.services.EstablecimientoServices;
-import com.sinensia.flashware.backend.integration.repositories.EstablecimientoRepository;
-
-import jakarta.transaction.Transactional;
+import com.sinensia.flashware.backend.integration.repositories.EstablecimientoPLRepository;
 
 @Service
 public class EstablecimientoServicesImpl implements EstablecimientoServices{
 
-	@Autowired
-	private EstablecimientoRepository establecimientoRepository;
+	private final EstablecimientoPLRepository establecimientoPLRepository;
 	
+	public EstablecimientoServicesImpl(EstablecimientoPLRepository establecimientoPLRepository) {
+		this.establecimientoPLRepository = establecimientoPLRepository;
+	}
+
 	@Override
-	@Transactional
 	public Long create(Establecimiento establecimiento) throws BusinessException {
-		
-		if(establecimiento.getId() != null) {
-			throw new BusinessException("El ID del establecimiento ha de ser NULL", true);
-		}
-		
-		Long id = System.currentTimeMillis();
-		establecimiento.setId(id);
-		
-		establecimientoRepository.save(establecimiento);
-		
-		return id;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Optional<Establecimiento> read(Long id) {
-		return establecimientoRepository.findById(id);
+		// TODO Auto-generated method stub
+		return Optional.empty();
 	}
 
 	@Override
-	@Transactional
 	public void update(Establecimiento establecimiento) throws BusinessException {
-
-		Long id = establecimiento.getId();
-		
-		boolean existe = establecimientoRepository.existsById(id);
-		
-		if(!existe) {
-			throw new BusinessException("El establecimiento " + id + " no existe. No se puede actualizar.", true);
-		}
-		
-		establecimientoRepository.save(establecimiento);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public List<Establecimiento> getAll() {
-		return establecimientoRepository.findAll();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

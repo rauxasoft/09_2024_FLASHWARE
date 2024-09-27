@@ -1,21 +1,38 @@
-package com.sinensia.flashware.backend.business.model;
+package com.sinensia.flashware.backend.integration.model;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Producto implements Serializable {
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+@Entity
+@Table(name="PRODUCTOS")
+public class ProductoPL implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	private Long codigo;
+	
 	private String nombre;
 	private String descripcion;
+	
+	@Temporal(TemporalType.DATE)
 	private Date fechaAlta;
+	
 	private Double precio;
 	private Boolean descatalogado;
-	private Categoria categoria;
 	
-	public Producto() {
+	@Enumerated(EnumType.STRING)
+	private CategoriaPL categoria;
+	
+	public ProductoPL() {
 		
 	}
 
@@ -67,11 +84,11 @@ public class Producto implements Serializable {
 		this.descatalogado = descatalogado;
 	}
 
-	public Categoria getCategoria() {
+	public CategoriaPL getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(CategoriaPL categoria) {
 		this.categoria = categoria;
 	}
 
@@ -91,7 +108,7 @@ public class Producto implements Serializable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Producto other = (Producto) obj;
+		ProductoPL other = (ProductoPL) obj;
 		return Objects.equals(codigo, other.codigo);
 	}
 

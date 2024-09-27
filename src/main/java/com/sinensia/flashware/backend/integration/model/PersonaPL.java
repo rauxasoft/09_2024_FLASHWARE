@@ -1,19 +1,37 @@
-package com.sinensia.flashware.backend.business.model;
+package com.sinensia.flashware.backend.integration.model;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Persona implements Serializable {
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="PERSONAS")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "DISCRIMINADOR")
+public abstract class PersonaPL implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private Long id;
+	
 	private String DNI;
 	private String nombre;
 	private String apellidos;
-	private Direccion direccion;
-	private DatosContacto datosContacto;
 	
-	public Persona() {
+	@Embedded
+	private DireccionPL direccion;
+	
+	@Embedded
+	private DatosContactoPL datosContacto;
+	
+	public PersonaPL() {
 		
 	}
 
@@ -49,19 +67,19 @@ public abstract class Persona implements Serializable {
 		this.apellidos = apellidos;
 	}
 
-	public Direccion getDireccion() {
+	public DireccionPL getDireccion() {
 		return direccion;
 	}
 
-	public void setDireccion(Direccion direccion) {
+	public void setDireccion(DireccionPL direccion) {
 		this.direccion = direccion;
 	}
 
-	public DatosContacto getDatosContacto() {
+	public DatosContactoPL getDatosContacto() {
 		return datosContacto;
 	}
 
-	public void setDatosContacto(DatosContacto datosContacto) {
+	public void setDatosContacto(DatosContactoPL datosContacto) {
 		this.datosContacto = datosContacto;
 	}
 
@@ -81,7 +99,7 @@ public abstract class Persona implements Serializable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Persona other = (Persona) obj;
+		PersonaPL other = (PersonaPL) obj;
 		return Objects.equals(id, other.id);
 	}
 

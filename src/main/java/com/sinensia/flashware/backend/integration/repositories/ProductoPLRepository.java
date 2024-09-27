@@ -7,16 +7,17 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.sinensia.flashware.backend.business.model.Categoria;
-import com.sinensia.flashware.backend.business.model.Producto;
 import com.sinensia.flashware.backend.business.model.dtos.ProductoDTO2;
+import com.sinensia.flashware.backend.integration.model.CategoriaPL;
+import com.sinensia.flashware.backend.integration.model.ProductoPL;
 
-public interface ProductoRepository extends JpaRepository<Producto, Long> {
+public interface ProductoPLRepository extends JpaRepository<ProductoPL, Long> {
 
-	List<Producto> findByPrecioBetweenOrderByPrecioDesc(Double min, Double max);
+	List<ProductoPL> findByPrecioBetweenOrderByPrecioDesc(Double min, Double max);
 	
-	List<Producto> findByCategoria(Categoria categoria);
+	List<ProductoPL> findByCategoria(Categoria categoria);
 	
-	@Query("SELECT p.codigo, CONCAT(p.nombre, ' (', p.categoria, ')'), p.precio FROM Producto p ORDER BY p.codigo")
+	@Query("SELECT p.codigo, CONCAT(p.nombre, ' (', p.categoria, ')'), p.precio FROM ProductoPL p ORDER BY p.codigo")
 	List<Object[]> findProductoDTO1();
 
 	@Query("SELECT new com.sinensia.flashware.backend.business.model.dtos.ProductoDTO2(                      "
@@ -30,18 +31,18 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
      + "              p.precio,                                                                              "
 	 + "              ROUND(p.precio + (p.precio * 0.21), 2)                                                 "
 	 + "            )                                                                                        "
-	 + "      FROM Producto p                                                                                "
+	 + "      FROM ProductoPL p                                                                                "
 	 + "  ORDER BY p.codigo                                                                                  ")
 	List<ProductoDTO2> findProductoDTO2();
 	
-	@Query("UPDATE Producto p SET p.precio = p.precio + (p.precio * :porcentaje / 100) WHERE p.codigo IN :ids")
+	@Query("UPDATE ProductoPL p SET p.precio = p.precio + (p.precio * :porcentaje / 100) WHERE p.codigo IN :ids")
 	@Modifying
 	int incrementarPrecio(Long[] ids, double porcentaje);
 	
-	@Query("UPDATE Producto p SET p.precio = p.precio + (p.precio * :porcentaje / 100) WHERE p IN :productos")
+	@Query("UPDATE ProductoPL p SET p.precio = p.precio + (p.precio * :porcentaje / 100) WHERE p IN :productos")
 	@Modifying
-	int incrementarPrecio(List<Producto> productos, double porcentaje);
+	int incrementarPrecio(List<ProductoPL> productos, double porcentaje);
 	
-	@Query("SELECT COUNT(p) FROM Producto p WHERE p.categoria = :categoria")
-	long contarNumeroProductosPorCategoria(Categoria categoria);
+	@Query("SELECT COUNT(p) FROM ProductoPL p WHERE p.categoria = :categoria")
+	long contarNumeroProductosPorCategoria(CategoriaPL categoria);
 }

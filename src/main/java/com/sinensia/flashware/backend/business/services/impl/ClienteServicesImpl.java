@@ -2,24 +2,28 @@ package com.sinensia.flashware.backend.business.services.impl;
 
 import java.util.List;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Cliente;
 import com.sinensia.flashware.backend.business.services.ClienteServices;
-import com.sinensia.flashware.backend.integration.repositories.ClienteRepository;
+import com.sinensia.flashware.backend.integration.model.ClientePL;
+import com.sinensia.flashware.backend.integration.repositories.ClientePLRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class ClienteServicesImpl implements ClienteServices{
 
-	private final ClienteRepository clienteRepository;
+	private final ClientePLRepository clientePLRepository;
+	private final DozerBeanMapper mapper;
 	
-	public ClienteServicesImpl(ClienteRepository clienteRepository) {
-		this.clienteRepository = clienteRepository;
+	public ClienteServicesImpl(ClientePLRepository clientePLRepository, DozerBeanMapper mapper) {
+		this.clientePLRepository = clientePLRepository;
+		this.mapper = mapper;
 	}
-	
+
 	@Override
 	@Transactional
 	public Long create(Cliente cliente) throws BusinessException {
@@ -31,14 +35,21 @@ public class ClienteServicesImpl implements ClienteServices{
 		Long id = System.currentTimeMillis();
 		cliente.setId(id);
 		
-		clienteRepository.save(cliente);
+		ClientePL clientePL = mapper.map(cliente, ClientePL.class);
+		
+		clientePLRepository.save(clientePL);
 		
 		return id;
 	}
 
 	@Override
 	public List<Cliente> getAll() {
-		return clienteRepository.findAll();
+		
+		List<ClientePL> clientesPL = clientePLRepository.findAll();
+	
+		return clientesPL.stream().map(x -> mapper.map(x, Cliente.class)).toList();
 	}
+	
+	
 
 }

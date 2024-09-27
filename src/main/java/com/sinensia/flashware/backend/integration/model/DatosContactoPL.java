@@ -1,15 +1,18 @@
-package com.sinensia.flashware.backend.business.model;
+package com.sinensia.flashware.backend.integration.model;
 
 import java.io.Serializable;
 
-public class DatosContacto implements Serializable {
+import jakarta.persistence.Embeddable;
+
+@Embeddable
+public class DatosContactoPL implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String telefonoMovil;
 	private String telefonoFijo;
 	private String email;
 	
-	public DatosContacto() {
+	public DatosContactoPL() {
 		
 	}
 

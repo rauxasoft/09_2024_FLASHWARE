@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+      
+    <!-- Business to Integration --> 
+    
+    <mapping>
+    	<class-a>com.sinensia.flashware.backend.business.model.Cliente</class-a>
+    	<class-b>com.sinensia.flashware.backend.integration.model.ClientePL</class-b>
+    </mapping> 
+    
+    <mapping>
+    	<class-a>com.sinensia.flashware.backend.business.model.DatosContacto</class-a>
+    	<class-b>com.sinensia.flashware.backend.integration.model.DatosContactoPL</class-b>
+    </mapping> 
+   
+    <mapping>
+    	<class-a>com.sinensia.flashware.backend.business.model.Direccion</class-a>
+    	<class-b>com.sinensia.flashware.backend.integration.model.DireccionPL</class-b>
+    </mapping>
+    
+    <mapping>
+    	<class-a>com.sinensia.flashware.backend.business.model.Establecimiento</class-a>
+    	<class-b>com.sinensia.flashware.backend.integration.model.EstablecimientoPL</class-b>
+    </mapping>
+    
+   	<mapping>
+    	<class-a>com.sinensia.flashware.backend.business.model.LineaDetallePedido</class-a>
+    	<class-b>com.sinensia.flashware.backend.integration.model.LineaDetallePedidoPL</class-b>
+    </mapping>
+    
+    <mapping>
+    	<class-a>com.sinensia.flashware.backend.business.model.Pedido</class-a>
+    	<class-b>com.sinensia.flashware.backend.integration.model.PedidoPL</class-b>
+    </mapping>
+    
+    <mapping>
+    	<class-a>com.sinensia.flashware.backend.business.model.Persona</class-a>
+    	<class-b>com.sinensia.flashware.backend.integration.model.PersonaPL</class-b>
+    </mapping>
+    
+    <mapping>
+    	<class-a>com.sinensia.flashware.backend.business.model.Producto</class-a>
+    	<class-b>com.sinensia.flashware.backend.integration.model.ProductoPL</class-b>
+    </mapping>
+    
+    <mapping>
+    	<class-a>com.sinensia.flashware.backend.business.model.Tecnico</class-a>
+    	<class-b>com.sinensia.flashware.backend.integration.model.TecnicoPL</class-b>
+    </mapping>
+    
+ </mappings>
