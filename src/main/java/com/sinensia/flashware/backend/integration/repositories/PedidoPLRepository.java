@@ -16,5 +16,5 @@ public interface PedidoPLRepository extends JpaRepository<PedidoPL, Long> {
 	
 	@Query("SELECT COUNT(p) FROM PedidoPL p WHERE p.establecimiento.id = :idEstablecimiento")
 	long contarNumeroPedidosPorEstablecimiento(Long idEstablecimiento);
-	
+
 }

@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import com.sinensia.flashware.backend.business.model.Categoria;
 import com.sinensia.flashware.backend.business.model.dtos.ProductoDTO2;
 import com.sinensia.flashware.backend.integration.model.CategoriaPL;
 import com.sinensia.flashware.backend.integration.model.ProductoPL;
@@ -15,7 +14,7 @@ public interface ProductoPLRepository extends JpaRepository<ProductoPL, Long> {
 
 	List<ProductoPL> findByPrecioBetweenOrderByPrecioDesc(Double min, Double max);
 	
-	List<ProductoPL> findByCategoria(Categoria categoria);
+	List<ProductoPL> findByCategoria(CategoriaPL categoria);
 	
 	@Query("SELECT p.codigo, CONCAT(p.nombre, ' (', p.categoria, ')'), p.precio FROM ProductoPL p ORDER BY p.codigo")
 	List<Object[]> findProductoDTO1();
@@ -45,4 +44,10 @@ public interface ProductoPLRepository extends JpaRepository<ProductoPL, Long> {
 	
 	@Query("SELECT COUNT(p) FROM ProductoPL p WHERE p.categoria = :categoria")
 	long contarNumeroProductosPorCategoria(CategoriaPL categoria);
+	
+	@Query("SELECT p.categoria, COUNT(p) FROM ProductoPL p GROUP BY p.categoria")
+	List<Object[]> getEstadisticaNumeroProductos();
+	
+	@Query("SELECT p.categoria, ROUND(AVG(p.precio), 2) FROM ProductoPL p GROUP BY p.categoria")
+	List<Object[]> getEstadisticaPreciosmedios();
 }
