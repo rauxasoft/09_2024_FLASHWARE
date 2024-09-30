@@ -40,7 +40,7 @@ public class FiltroAuditor implements Filter {
 		requestLogPL.setFechaHora(new Date(id));
 		requestLogPL.setRemoteIP(servletRequest.getRemoteAddr());
 		requestLogPL.setRequestMethod(servletRequest.getMethod());
-		requestLogPL.setRequestPath("/TODO");
+		requestLogPL.setRequestPath(servletRequest.getServletPath());
 		requestLogPL.setResponseStatusCode(servleResponse.getStatus());
 		requestLogPL.setElapsedTime(System.currentTimeMillis() - id);
 		
