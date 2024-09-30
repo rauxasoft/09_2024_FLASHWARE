@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,7 +29,7 @@ public class PedidoPL implements Serializable {
 	private Date fechaHora;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="ESTADO")
+//	@Column(name="ESTADO")
 	private EstadoPedidoPL estado;
 	
 	@ManyToOne

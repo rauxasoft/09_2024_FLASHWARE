@@ -11,24 +11,15 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinensia.flashware.backend.business.model.Tecnico;
 import com.sinensia.flashware.backend.business.services.TecnicoServices;
 
 @WebMvcTest(TecnicoController.class)
-class TecnicoControllerTest {
-
-	@Autowired
-	private MockMvc miniPostman;
-	
-	@Autowired
-	private ObjectMapper objectMapper;
+class TecnicoControllerTest extends AbstractControllerTest {
 	
 	@MockBean
 	private TecnicoServices tecnicoServices;
@@ -47,7 +38,7 @@ class TecnicoControllerTest {
 	
 		when(tecnicoServices.getAll()).thenReturn(tecnicos);
 	
-		MvcResult respuesta = miniPostman.perform(get("/tecnicos").contentType("application/json"))
+		MvcResult respuesta = mockMvc.perform(get("/tecnicos").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
 		

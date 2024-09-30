@@ -12,34 +12,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.List;
-import java.util.Optional;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Producto;
 import com.sinensia.flashware.backend.business.services.ProductoServices;
 import com.sinensia.flashware.backend.presentation.config.HttpErrorResponse;
 
 @WebMvcTest(ProductoController.class)
-class ProductoControllerTest {
+class ProductoControllerTest extends AbstractControllerTest{
 
-	@Autowired
-	private MockMvc miniPostman;
-	
-	@Autowired
-	private ObjectMapper objectMapper;
-	
 	@MockBean
 	private ProductoServices productoServices;
 	
@@ -57,7 +48,7 @@ class ProductoControllerTest {
 		
 		when(productoServices.read(1000L)).thenReturn(Optional.of(producto1));
 		
-		MvcResult respuesta = miniPostman.perform(get("/productos/1000").contentType("application/json"))
+		MvcResult respuesta = mockMvc.perform(get("/productos/1000").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
 		
@@ -73,7 +64,7 @@ class ProductoControllerTest {
 		
 		when(productoServices.read(1000L)).thenReturn(Optional.empty());
 		
-		MvcResult respuesta = miniPostman.perform(get("/productos/1000").contentType("application/json"))
+		MvcResult respuesta = mockMvc.perform(get("/productos/1000").contentType("application/json"))
 									.andExpect(status().isNotFound())
 									.andReturn();
 	
@@ -89,7 +80,7 @@ class ProductoControllerTest {
 	
 		when(productoServices.getAll()).thenReturn(productos);
 	
-		MvcResult respuesta = miniPostman.perform(get("/productos").contentType("application/json"))
+		MvcResult respuesta = mockMvc.perform(get("/productos").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
 		
@@ -104,7 +95,7 @@ class ProductoControllerTest {
 		
 		when(productoServices.getBetweenPriceRange(10.0, 20.0)).thenReturn(productos);
 		
-		MvcResult respuesta = miniPostman.perform(get("/productos")
+		MvcResult respuesta = mockMvc.perform(get("/productos")
 													.param("min", "10.0")
 													.param("max", "20.0")
 													.contentType("application/json"))
@@ -127,7 +118,7 @@ class ProductoControllerTest {
 		
 		when(productoServices.create(producto1)).thenReturn(32L);
 		
-		miniPostman.perform(post("/productos").contentType("application/json").content(requestBody))
+		mockMvc.perform(post("/productos").contentType("application/json").content(requestBody))
 								.andExpect(status().isCreated())
 								.andExpect(header().string("Location", "http://localhost/productos/32"));
 		
@@ -140,7 +131,7 @@ class ProductoControllerTest {
 		
 		String requestBody = objectMapper.writeValueAsString(producto1);
 		
-		MvcResult respuesta = miniPostman.perform(post("/productos").contentType("application/json").content(requestBody))
+		MvcResult respuesta = mockMvc.perform(post("/productos").contentType("application/json").content(requestBody))
 													.andExpect(status().isBadRequest())
 													.andReturn();
 		
@@ -156,7 +147,7 @@ class ProductoControllerTest {
 		
 		String requestBody = objectMapper.writeValueAsString(producto1);
 		
-		miniPostman.perform(put("/productos/1000").contentType("application/json").content(requestBody))
+		mockMvc.perform(put("/productos/1000").contentType("application/json").content(requestBody))
 						.andExpect(status().isNoContent());
 		
 		verify(productoServices, times(1)).update(producto1);
@@ -170,7 +161,7 @@ class ProductoControllerTest {
 		
 		String requestBody = objectMapper.writeValueAsString(producto1);
 		
-		MvcResult respuesta = miniPostman.perform(put("/productos/1000").contentType("application/json").content(requestBody))
+		MvcResult respuesta = mockMvc.perform(put("/productos/1000").contentType("application/json").content(requestBody))
 											.andExpect(status().isBadRequest())
 											.andReturn();
 		
@@ -184,7 +175,7 @@ class ProductoControllerTest {
 	@Test
 	void eliminamos_producto_ok() throws Exception {
 		
-		miniPostman.perform(delete("/productos/1000").contentType("application/json"))
+		mockMvc.perform(delete("/productos/1000").contentType("application/json"))
 						.andExpect(status().isNoContent());
 		
 		verify(productoServices, times(1)).delete(1000L);
@@ -195,7 +186,7 @@ class ProductoControllerTest {
 		
 		doThrow(new BusinessException("El producto con codigo 1000 no existe.", true)).when(productoServices).delete(1000L);
 		
-		MvcResult respuesta = miniPostman.perform(delete("/productos/1000").contentType("application/json"))
+		MvcResult respuesta = mockMvc.perform(delete("/productos/1000").contentType("application/json"))
 											.andExpect(status().isBadRequest())
 											.andReturn();
 		

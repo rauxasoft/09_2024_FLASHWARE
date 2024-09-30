@@ -19,26 +19,18 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
+
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Pedido;
 import com.sinensia.flashware.backend.business.services.PedidoServices;
 import com.sinensia.flashware.backend.presentation.config.HttpErrorResponse;
 
 @WebMvcTest(PedidoController.class)
-class PedidoControllerTest {
-
-	@Autowired
-	private MockMvc miniPostman;
-	
-	@Autowired
-	private ObjectMapper objectMapper;
+class PedidoControllerTest extends AbstractControllerTest{
 	
 	@MockBean
 	private PedidoServices pedidoServices;
@@ -57,7 +49,7 @@ class PedidoControllerTest {
 		
 		when(pedidoServices.read(1L)).thenReturn(Optional.of(pedido1));
 		
-		MvcResult respuesta = miniPostman.perform(get("/pedidos/1").contentType("application/json"))
+		MvcResult respuesta = mockMvc.perform(get("/pedidos/1").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
 		
@@ -73,7 +65,7 @@ class PedidoControllerTest {
 		
 		when(pedidoServices.read(1000L)).thenReturn(Optional.empty());
 		
-		MvcResult respuesta = miniPostman.perform(get("/pedidos/1000").contentType("application/json"))
+		MvcResult respuesta = mockMvc.perform(get("/pedidos/1000").contentType("application/json"))
 									.andExpect(status().isNotFound())
 									.andReturn();
 	
@@ -89,7 +81,7 @@ class PedidoControllerTest {
 	
 		when(pedidoServices.getAll()).thenReturn(pedidos);
 	
-		MvcResult respuesta = miniPostman.perform(get("/pedidos").contentType("application/json"))
+		MvcResult respuesta = mockMvc.perform(get("/pedidos").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
 		
@@ -108,7 +100,7 @@ class PedidoControllerTest {
 		
 		when(pedidoServices.create(pedido1)).thenReturn(32L);
 		
-		miniPostman.perform(post("/pedidos").contentType("application/json").content(requestBody))
+		mockMvc.perform(post("/pedidos").contentType("application/json").content(requestBody))
 								.andExpect(status().isCreated())
 								.andExpect(header().string("Location", "http://localhost/pedidos/32"));
 		
@@ -121,7 +113,7 @@ class PedidoControllerTest {
 		
 		String requestBody = objectMapper.writeValueAsString(pedido1);
 		
-		MvcResult respuesta = miniPostman.perform(post("/pedidos").contentType("application/json").content(requestBody))
+		MvcResult respuesta = mockMvc.perform(post("/pedidos").contentType("application/json").content(requestBody))
 													.andExpect(status().isBadRequest())
 													.andReturn();
 		
@@ -137,7 +129,7 @@ class PedidoControllerTest {
 		
 		String requestBody = objectMapper.writeValueAsString(pedido1);
 		
-		miniPostman.perform(put("/pedidos/1").contentType("application/json").content(requestBody))
+		mockMvc.perform(put("/pedidos/1").contentType("application/json").content(requestBody))
 						.andExpect(status().isNoContent());
 		
 		verify(pedidoServices, times(1)).update(pedido1);
@@ -151,7 +143,7 @@ class PedidoControllerTest {
 		
 		String requestBody = objectMapper.writeValueAsString(pedido1);
 		
-		MvcResult respuesta = miniPostman.perform(put("/pedidos/1").contentType("application/json").content(requestBody))
+		MvcResult respuesta = mockMvc.perform(put("/pedidos/1").contentType("application/json").content(requestBody))
 											.andExpect(status().isBadRequest())
 											.andReturn();
 		
@@ -165,7 +157,7 @@ class PedidoControllerTest {
 	@Test
 	void eliminamos_pedido_ok() throws Exception {
 		
-		miniPostman.perform(delete("/pedidos/1").contentType("application/json"))
+		mockMvc.perform(delete("/pedidos/1").contentType("application/json"))
 						.andExpect(status().isNoContent());
 		
 		verify(pedidoServices, times(1)).delete(1L);
@@ -176,7 +168,7 @@ class PedidoControllerTest {
 		
 		doThrow(new BusinessException("El pedido con número 1000 no existe.", true)).when(pedidoServices).delete(1000L);
 		
-		MvcResult respuesta = miniPostman.perform(delete("/pedidos/1000").contentType("application/json"))
+		MvcResult respuesta = mockMvc.perform(delete("/pedidos/1000").contentType("application/json"))
 											.andExpect(status().isBadRequest())
 											.andReturn();
 		
