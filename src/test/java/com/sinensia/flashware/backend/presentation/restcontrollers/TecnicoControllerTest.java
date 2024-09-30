@@ -1,11 +1,9 @@
 package com.sinensia.flashware.backend.presentation.restcontrollers;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,17 +36,13 @@ class TecnicoControllerTest extends AbstractControllerTest {
 	
 		when(tecnicoServices.getAll()).thenReturn(tecnicos);
 	
-		MvcResult respuesta = mockMvc.perform(get("/tecnicos").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/tecnicos").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
 		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String pedidosJSON = objectMapper.writeValueAsString(tecnicos);
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(pedidosJSON);
+		testResponseBody(mvcResult, tecnicos);
 	}
 	
-
 	// ************************************************************************
 	//
 	// Private Methods

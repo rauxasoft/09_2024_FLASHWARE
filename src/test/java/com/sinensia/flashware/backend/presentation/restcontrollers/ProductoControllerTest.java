@@ -1,6 +1,5 @@
 package com.sinensia.flashware.backend.presentation.restcontrollers;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -12,7 +11,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -48,14 +46,11 @@ class ProductoControllerTest extends AbstractControllerTest{
 		
 		when(productoServices.read(1000L)).thenReturn(Optional.of(producto1));
 		
-		MvcResult respuesta = mockMvc.perform(get("/productos/1000").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/productos/1000").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
-		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String productoJSON = objectMapper.writeValueAsString(producto1);
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(productoJSON);
+	
+		testResponseBody(mvcResult, producto1);
 		
 	}
 	
@@ -64,14 +59,11 @@ class ProductoControllerTest extends AbstractControllerTest{
 		
 		when(productoServices.read(1000L)).thenReturn(Optional.empty());
 		
-		MvcResult respuesta = mockMvc.perform(get("/productos/1000").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/productos/1000").contentType("application/json"))
 									.andExpect(status().isNotFound())
 									.andReturn();
-	
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("No existe el producto 1000"));
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
+		
+		testResponseBody(mvcResult, new HttpErrorResponse("No existe el producto 1000"));
 		
 	}
 	
@@ -80,14 +72,11 @@ class ProductoControllerTest extends AbstractControllerTest{
 	
 		when(productoServices.getAll()).thenReturn(productos);
 	
-		MvcResult respuesta = mockMvc.perform(get("/productos").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/productos").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
-		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String productosJSON = objectMapper.writeValueAsString(productos);
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(productosJSON);
+	
+		testResponseBody(mvcResult, productos);
 	}
 	
 	@Test
@@ -95,17 +84,14 @@ class ProductoControllerTest extends AbstractControllerTest{
 		
 		when(productoServices.getBetweenPriceRange(10.0, 20.0)).thenReturn(productos);
 		
-		MvcResult respuesta = mockMvc.perform(get("/productos")
+		MvcResult mvcResult = mockMvc.perform(get("/productos")
 													.param("min", "10.0")
 													.param("max", "20.0")
 													.contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
-								
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String productosJSON = objectMapper.writeValueAsString(productos);
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(productosJSON);
+									
+		testResponseBody(mvcResult, productos);
 		
 	}
 	
@@ -121,7 +107,6 @@ class ProductoControllerTest extends AbstractControllerTest{
 		mockMvc.perform(post("/productos").contentType("application/json").content(requestBody))
 								.andExpect(status().isCreated())
 								.andExpect(header().string("Location", "http://localhost/productos/32"));
-		
 	}
 	
 	@Test
@@ -131,14 +116,11 @@ class ProductoControllerTest extends AbstractControllerTest{
 		
 		String requestBody = objectMapper.writeValueAsString(producto1);
 		
-		MvcResult respuesta = mockMvc.perform(post("/productos").contentType("application/json").content(requestBody))
+		MvcResult mvcResult = mockMvc.perform(post("/productos").contentType("application/json").content(requestBody))
 													.andExpect(status().isBadRequest())
 													.andReturn();
 		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("El producto debe tener codigo NULL"));
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
+		testResponseBody(mvcResult, new HttpErrorResponse("El producto debe tener codigo NULL"));
 		
 	}
 	
@@ -161,14 +143,11 @@ class ProductoControllerTest extends AbstractControllerTest{
 		
 		String requestBody = objectMapper.writeValueAsString(producto1);
 		
-		MvcResult respuesta = mockMvc.perform(put("/productos/1000").contentType("application/json").content(requestBody))
+		MvcResult mvcResult = mockMvc.perform(put("/productos/1000").contentType("application/json").content(requestBody))
 											.andExpect(status().isBadRequest())
 											.andReturn();
-		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("El producto con codigo 1000 no existe."));
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
+			
+		testResponseBody(mvcResult, new HttpErrorResponse("El producto con codigo 1000 no existe."));
 		
 	}
 	
@@ -186,14 +165,11 @@ class ProductoControllerTest extends AbstractControllerTest{
 		
 		doThrow(new BusinessException("El producto con codigo 1000 no existe.", true)).when(productoServices).delete(1000L);
 		
-		MvcResult respuesta = mockMvc.perform(delete("/productos/1000").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(delete("/productos/1000").contentType("application/json"))
 											.andExpect(status().isBadRequest())
 											.andReturn();
 		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("El producto con codigo 1000 no existe."));
-		
-		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
+		testResponseBody(mvcResult, new HttpErrorResponse("El producto con codigo 1000 no existe."));
 		
 	}
 	
@@ -213,6 +189,5 @@ class ProductoControllerTest extends AbstractControllerTest{
 		
 		productos = Arrays.asList(producto1, producto2);
 	}
-	
-	
+
 }

@@ -65,15 +65,11 @@ class PedidoControllerTest extends AbstractControllerTest{
 		
 		when(pedidoServices.read(1000L)).thenReturn(Optional.empty());
 		
-		MvcResult respuesta = mockMvc.perform(get("/pedidos/1000").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/pedidos/1000").contentType("application/json"))
 									.andExpect(status().isNotFound())
 									.andReturn();
-	
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("No existe el pedido 1000"));
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
 		
+		testResponseBody(mvcResult, new HttpErrorResponse("No existe el pedido 1000"));
 	}
 	
 	@Test
@@ -81,14 +77,11 @@ class PedidoControllerTest extends AbstractControllerTest{
 	
 		when(pedidoServices.getAll()).thenReturn(pedidos);
 	
-		MvcResult respuesta = mockMvc.perform(get("/pedidos").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/pedidos").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
-		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String pedidosJSON = objectMapper.writeValueAsString(pedidos);
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(pedidosJSON);
+
+		testResponseBody(mvcResult, pedidos);
 	}
 	
 	@Test
@@ -113,14 +106,11 @@ class PedidoControllerTest extends AbstractControllerTest{
 		
 		String requestBody = objectMapper.writeValueAsString(pedido1);
 		
-		MvcResult respuesta = mockMvc.perform(post("/pedidos").contentType("application/json").content(requestBody))
+		MvcResult mvcResult = mockMvc.perform(post("/pedidos").contentType("application/json").content(requestBody))
 													.andExpect(status().isBadRequest())
 													.andReturn();
-		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("El pedido debe tener número NULL"));
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
+	
+		testResponseBody(mvcResult, new HttpErrorResponse("El pedido debe tener número NULL"));
 		
 	}
 	
@@ -143,15 +133,12 @@ class PedidoControllerTest extends AbstractControllerTest{
 		
 		String requestBody = objectMapper.writeValueAsString(pedido1);
 		
-		MvcResult respuesta = mockMvc.perform(put("/pedidos/1").contentType("application/json").content(requestBody))
+		MvcResult mvcResult = mockMvc.perform(put("/pedidos/1").contentType("application/json").content(requestBody))
 											.andExpect(status().isBadRequest())
 											.andReturn();
 		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("El pedido con número 1 no existe."));
-				
-		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
-		
+		testResponseBody(mvcResult, new HttpErrorResponse("El pedido con número 1 no existe."));
+
 	}
 	
 	@Test
@@ -168,15 +155,11 @@ class PedidoControllerTest extends AbstractControllerTest{
 		
 		doThrow(new BusinessException("El pedido con número 1000 no existe.", true)).when(pedidoServices).delete(1000L);
 		
-		MvcResult respuesta = mockMvc.perform(delete("/pedidos/1000").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(delete("/pedidos/1000").contentType("application/json"))
 											.andExpect(status().isBadRequest())
 											.andReturn();
-		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String httpErrorResponseJSON = objectMapper.writeValueAsString(new HttpErrorResponse("El pedido con número 1000 no existe."));
-		
-		assertThat(responseBody).isEqualToIgnoringWhitespace(httpErrorResponseJSON);
-		
+
+		testResponseBody(mvcResult, new HttpErrorResponse("El pedido con número 1000 no existe."));
 	}
 
 	// ************************************************************************
