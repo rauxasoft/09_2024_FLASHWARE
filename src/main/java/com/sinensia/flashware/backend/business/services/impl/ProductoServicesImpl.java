@@ -86,6 +86,7 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public List<Producto> getAll() {
+		
 		return convertListFromI2B(productoPLRepository.findAll());
 	}
 

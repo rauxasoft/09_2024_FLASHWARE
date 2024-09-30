@@ -32,7 +32,7 @@ public class ProductoController {
 
 	@Autowired
 	private ProductoServices productoServices;
-		
+	
 	@GetMapping("/{codigo}")
 	public Producto getByCodigo(@PathVariable Long codigo) {
 		
