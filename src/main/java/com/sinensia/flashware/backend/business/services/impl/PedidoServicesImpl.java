@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import com.sinensia.flashware.backend.business.config.BusinessException;
 import com.sinensia.flashware.backend.business.model.Pedido;
 import com.sinensia.flashware.backend.business.services.PedidoServices;
+import com.sinensia.flashware.backend.integration.model.PedidoPL;
 import com.sinensia.flashware.backend.integration.repositories.PedidoPLRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class PedidoServicesImpl implements PedidoServices {
@@ -24,57 +27,91 @@ public class PedidoServicesImpl implements PedidoServices {
 	}
 
 	@Override
+	@Transactional
 	public Long create(Pedido pedido) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(pedido.getNumero() != null) {
+			throw new BusinessException("El código del pedido ha de ser NULL", true);
+		}
+		
+		Long numero = System.currentTimeMillis();
+		pedido.setNumero(numero);
+		
+		PedidoPL pedidoPL = mapper.map(pedido, PedidoPL.class);
+		
+		pedidoPLRepository.save(pedidoPL);
+		
+		return numero;
 	}
 
 	@Override
 	public Optional<Pedido> read(Long numero) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return pedidoPLRepository.findById(numero).map(x -> mapper.map(x, Pedido.class));
 	}
 
 	@Override
+	@Transactional
 	public void update(Pedido pedido) throws BusinessException {
-		// TODO Auto-generated method stub
+
+		Long numero = pedido.getNumero();
+		
+		boolean existe = pedidoPLRepository.existsById(numero);
+		
+		if(!existe) {
+			throw new BusinessException("El pedido " + numero + " no existe. No se puede actualizar.", true);
+		}
+		
+		pedidoPLRepository.save(mapper.map(pedido, PedidoPL.class));
 		
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long numero) throws BusinessException {
-		// TODO Auto-generated method stub
+
+		boolean existe = pedidoPLRepository.existsById(numero);
+		
+		if(!existe) {
+			throw new BusinessException("El pedido " + numero + " no existe. No se puede eliminar.", true);
+		}
+		
+		pedidoPLRepository.deleteById(numero);
 		
 	}
 
 	@Override
 	public List<Pedido> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return convertListFromI2B(pedidoPLRepository.findAll());
 	}
 
 	@Override
 	public List<Pedido> getBetweenDates(Date desde, Date hasta) {
-		// TODO Auto-generated method stub
-		return null;
+		return convertListFromI2B(pedidoPLRepository.findByFechaHoraBetweenOrderByFechaHora(desde, hasta));
 	}
-
+		
 	@Override
 	public List<Pedido> getByEstablecimiento(Long idEstablecimiento) {
-		// TODO Auto-generated method stub
-		return null;
+		return convertListFromI2B(pedidoPLRepository.findByEstablecimientoId(idEstablecimiento));
 	}
 
 	@Override
 	public int getNumeroTotalPedidos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) pedidoPLRepository.count();
 	}
 
 	@Override
 	public int getNumeroTotalPedidosByEstablecimiento(Long idEstablecimiento) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) pedidoPLRepository.contarNumeroPedidosPorEstablecimiento(idEstablecimiento);
+	}
+	
+	// ************************************************************************
+	//
+	// Private Methods
+	//
+	// ************************************************************************
+		
+	private List<Pedido> convertListFromI2B(List<PedidoPL> pedidosPL){
+		return pedidosPL.stream().map(x -> mapper.map(x, Pedido.class)).toList();
 	}
 
 }

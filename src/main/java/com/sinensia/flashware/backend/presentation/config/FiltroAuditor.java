@@ -11,7 +11,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 public class FiltroAuditor implements Filter {
@@ -24,7 +23,6 @@ public class FiltroAuditor implements Filter {
 		Long entrada = System.currentTimeMillis();
 		
 		HttpServletRequest servletRequest = (HttpServletRequest) request;
-		HttpServletResponse servletResponse = (HttpServletResponse) response;
 		
 		chain.doFilter(request, response);
 
@@ -43,8 +41,6 @@ public class FiltroAuditor implements Filter {
 		System.out.println("Elapsed time: " + elapsedTime);
 		System.out.println("\n**********************************\n");
 		
-		
-	}
 
-	
+	}	
 }
