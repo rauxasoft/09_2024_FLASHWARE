@@ -14,15 +14,35 @@ public class LogAspectConfig {
 	private Logger logger = LoggerFactory.getLogger(LogAspectConfig.class);
 
 	@Before(value="execution(* com.sinensia.flashware.backend.presentation.restcontrollers.*.*(..))")
-	public void doSomething(JoinPoint joinPoint) {
-		
-		String methodName = joinPoint.getSignature().getName();
-		
-		// TODO 1.- Mostrar el nombre de la clase. Por ejemplo PedidoController
-		// TODO 2.- Mostrar el argumento. Por ejemplo para GET/ pedidos/1233 ---> mostrar 1233
-		
-		logger.info("Presentation layer: {}", methodName);
+	public void logPresentationLayer(JoinPoint joinPoint) {
+		crearLog(joinPoint);
 	}
 	
-	// TODO 3.- Crear intercepción también para los métodos de las implementaciones de business
+	@Before(value="execution(* com.sinensia.flashware.backend.business.services.impl.*.*(..))")
+	public void logBusinessLayer(JoinPoint joinPoint) {
+		crearLog(joinPoint);	
+	}
+	
+	// ******************************************************************
+	//
+	// Private Methods
+	//
+	// ******************************************************************
+	
+	private void crearLog(JoinPoint joinPoint) {
+		
+		String nombreClase = joinPoint.getTarget().getClass().getSimpleName();
+		String nombreMetodo = joinPoint.getSignature().getName();
+		Object[] argumentos = joinPoint.getArgs();
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for(Object argumento: argumentos) {
+			sb.append(argumento + " ");
+		}
+	
+		String strArgumentos = argumentos.length == 0 ? "" : " con argumentos " + sb.toString().trim();
+		
+		logger.info("{}: Invocado {}(){}", nombreClase, nombreMetodo, strArgumentos);
+	}
 }

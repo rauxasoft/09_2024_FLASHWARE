@@ -92,11 +92,6 @@
 			<version>5.5.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.sinensia</groupId>
-			<artifactId>utilidades</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>
