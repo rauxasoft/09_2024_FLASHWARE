@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.flashware.backend.business.config.BusinessException;
@@ -15,9 +16,11 @@ import com.sinensia.flashware.backend.integration.repositories.PedidoPLRepositor
 public class PedidoServicesImpl implements PedidoServices {
 
 	private final PedidoPLRepository pedidoPLRepository;
+	private final DozerBeanMapper mapper;
 	
-	public PedidoServicesImpl(PedidoPLRepository pedidoPLRepository) {
+	public PedidoServicesImpl(PedidoPLRepository pedidoPLRepository, DozerBeanMapper mapper) {
 		this.pedidoPLRepository = pedidoPLRepository;
+		this.mapper = mapper;
 	}
 
 	@Override
