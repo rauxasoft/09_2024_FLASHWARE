@@ -23,3 +23,4 @@ spring.application.name=flashware
 
 
 
+CMD ["java", "-jar", "/temp/target/flashware.jar"] 

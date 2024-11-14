@@ -1,8 +1,13 @@
 FROM alpine:latest
-COPY pom.xml /tmp
-COPY src /tmp/src
-WORKDIR /tmp
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+
 RUN apk update && \
     apk add openjdk17 \
             maven && \
-    mvn package
+    mvn clean package
+# WORKDIR /app
+  
+EXPOSE 8080
+CMD ["java","-jar","/app/target/flashware.jar"]
