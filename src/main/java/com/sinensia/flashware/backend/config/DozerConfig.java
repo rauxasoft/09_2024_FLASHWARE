@@ -1,7 +1,5 @@
 package com.sinensia.flashware.backend.config;
 
-import java.util.List;
-
 import org.dozer.DozerBeanMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +12,11 @@ public class DozerConfig {
 		
 		DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
 		
-		List<String> mappingFiles = List.of("dozer-configuration-mappings.xml");
+		// Solo si se requieren mappings "complejos"....
 		
-		dozerBeanMapper.setMappingFiles(mappingFiles);
+		//List<String> mappingFiles = List.of("dozer-configuration-mappings.xml");
+		
+		//dozerBeanMapper.setMappingFiles(mappingFiles);
 		
 		return  dozerBeanMapper;
 	}
